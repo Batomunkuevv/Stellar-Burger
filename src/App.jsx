@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import PropTypes from 'prop-types';
+import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import AppHeader from "./components/app-header/app-header";
+import BurgerConstructor from "./components/burger-constructor/burger-constructor";
+import BurgerIngredients from "./components/burger-ingredients/burger-ingredients";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+    render() {
+        return (
+            <>
+                <AppHeader />
+                <main className="page">
+                    <div className="container">
+                        <div className="page__body pl-5 pr-5">
+                            <BurgerIngredients />
+                            <BurgerConstructor />
+                        </div>
+                    </div>
+                </main>
+            </>
+        );
+    }
 }
+
+Button.propTypes = {
+    size: PropTypes.string.isRequired,
+    htmlType: PropTypes.string.isRequired,
+}
+
 
 export default App;
