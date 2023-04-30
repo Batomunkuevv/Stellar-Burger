@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import appHeaderStyles from "./app-header.module.css";
 import { Logo, ProfileIcon, BurgerIcon, ListIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
@@ -24,18 +23,6 @@ const AppHeader = () => {
             </div>
         </header>
     );
-}
-
-BurgerIcon.propTypes = {
-    type: PropTypes.string.isRequired
-}
-
-ListIcon.propTypes = {
-    type: PropTypes.string.isRequired
-}
-
-ProfileIcon.propTypes = {
-    type: PropTypes.string.isRequired
 }
 
 export default AppHeader;

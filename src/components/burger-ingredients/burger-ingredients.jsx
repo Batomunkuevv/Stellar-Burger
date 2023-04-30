@@ -9,7 +9,7 @@ const BurgerIngredients = () => {
     const buns = useMemo(() => data.filter((item) => item.type === 'bun'), [data]);
     const mains = useMemo(() => data.filter((item) => item.type === 'main'), [data]);
     const sauces = useMemo(() => data.filter((item) => item.type === 'sauce'), [data]);
-    
+
     return (
         <div className="ingredients pt-10">
             <h2 className="text text_type_main-large mb-5">Соберите бургер</h2>
@@ -40,11 +40,6 @@ const BurgerIngredients = () => {
             </div>
         </div>
     );
-}
-
-Tab.propTypes = {
-    active: PropTypes.bool,
-    value: PropTypes.string.isRequired,
 }
 
 Ingredient.propTypes = {

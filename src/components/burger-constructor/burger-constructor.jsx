@@ -98,24 +98,4 @@ const BurgerConstructor = () => {
     )
 }
 
-CurrencyIcon.propTypes = {
-    type: PropTypes.string.isRequired
-}
-
-ConstructorElement.propTypes = {
-    type: PropTypes.string,
-    text: PropTypes.string.isRequired,
-    thumbnail: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    isLocked: PropTypes.bool,
-    extraClass: PropTypes.string
-}
-
-Button.propTypes = {
-    type: PropTypes.string.isRequired,
-    size: PropTypes.string.isRequired,
-    htmlType: PropTypes.string.isRequired,
-}
-
-
 export default BurgerConstructor;

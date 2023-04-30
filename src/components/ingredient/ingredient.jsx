@@ -20,6 +20,4 @@ const Ingredient = (props) => {
     )
 }
 
-
-
 export default Ingredient;
