@@ -23,10 +23,4 @@ class App extends React.Component {
     }
 }
 
-Button.propTypes = {
-    size: PropTypes.string.isRequired,
-    htmlType: PropTypes.string.isRequired,
-}
-
-
 export default App;
