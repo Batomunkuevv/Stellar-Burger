@@ -1,6 +1,7 @@
 .ingredient {
     position: relative;
     min-height: 208px;
+    cursor: pointer;
 }
 
 .ingredient__img {

@@ -1,8 +1,29 @@
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button, CurrencyIcon, ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import Modal from '../modal/modal';
+import OrderDetails from '../order-details/order-details';
 import burgerConstructorStyles from './burger-constructor.module.css'
 
 const BurgerConstructor = () => {
+    const [visibleModal, toggleModal] = useState(false);
+
+    function handleOpenModal() {
+        toggleModal(true);
+        document.body.style.overflow = 'hidden';
+    }
+
+    function handleCloseModal() {
+        toggleModal(false);
+        document.body.style.overflow = '';
+    }
+
+    const modal = (
+        <Modal onClose={handleCloseModal}>
+            <OrderDetails />
+        </Modal>
+    )
+
     return (
         <div className={`${burgerConstructorStyles.burger_constructor} pt-25`}>
             <div className={`${burgerConstructorStyles.burger_constructor__body} mb-10`}>
@@ -90,12 +111,17 @@ const BurgerConstructor = () => {
                     <p className="text text_type_digits-medium mr-2">610</p>
                     <CurrencyIcon type="primary" />
                 </div>
-                <Button htmlType="button" type="primary" size="large">
+                <Button onClick={handleOpenModal} htmlType="button" type="primary" size="large">
                     Оформить заказ
                 </Button>
             </div>
+            {visibleModal && modal}
         </div>
     )
+}
+
+Modal.PropTypes = {
+    onClose: PropTypes.func
 }
 
 export default BurgerConstructor;

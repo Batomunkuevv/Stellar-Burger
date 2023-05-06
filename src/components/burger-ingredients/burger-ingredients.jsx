@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import Ingredient from "../ingredient/ingredient";
 import burgerIngredientsStyles from "./burger-ingredients.module.css";
-import data from '../../utils/data';
 
-const BurgerIngredients = () => {
+const BurgerIngredients = ({ data }) => {
     const buns = useMemo(() => data.filter((item) => item.type === 'bun'), [data]);
     const mains = useMemo(() => data.filter((item) => item.type === 'main'), [data]);
     const sauces = useMemo(() => data.filter((item) => item.type === 'sauce'), [data]);
@@ -22,19 +21,19 @@ const BurgerIngredients = () => {
                 <h3 className="text text_type_main-medium mb-6">Булки</h3>
                 <div className={`${burgerIngredientsStyles.ingredients__block} pl-4 mb-10`}>
                     {buns.map(ingredient => {
-                        return <Ingredient key={ingredient._id} count={ingredient.__v} price={ingredient.price} name={ingredient.name} image={ingredient.image} />
+                        return <Ingredient key={ingredient._id} {...ingredient} />
                     })}
                 </div>
                 <h3 className="text text_type_main-medium mb-6">Соусы</h3>
                 <div className={`${burgerIngredientsStyles.ingredients__block} pl-4 mb-10`}>
                     {sauces.map(ingredient => {
-                        return <Ingredient key={ingredient._id} count={ingredient.__v} price={ingredient.price} name={ingredient.name} image={ingredient.image} />
+                        return <Ingredient key={ingredient._id} {...ingredient} />
                     })}
                 </div>
                 <h3 className="text text_type_main-medium mb-6">Начинки</h3>
                 <div className={`${burgerIngredientsStyles.ingredients__block} pl-4`}>
                     {mains.map(ingredient => {
-                        return <Ingredient key={ingredient._id} count={ingredient.__v} price={ingredient.price} name={ingredient.name} image={ingredient.image} />
+                        return <Ingredient key={ingredient._id} {...ingredient} />
                     })}
                 </div>
             </div>
@@ -42,11 +41,5 @@ const BurgerIngredients = () => {
     );
 }
 
-Ingredient.propTypes = {
-    count: PropTypes.number.isRequired,
-    price: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
-}
 
 export default BurgerIngredients;
