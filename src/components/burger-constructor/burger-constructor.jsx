@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
 import { Button, CurrencyIcon, ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
 import burgerConstructorStyles from './burger-constructor.module.css'
+import dataPropTypes from '../../utils/data';
 
 const BurgerConstructor = () => {
     const [visibleModal, toggleModal] = useState(false);
@@ -120,8 +120,6 @@ const BurgerConstructor = () => {
     )
 }
 
-Modal.PropTypes = {
-    onClose: PropTypes.func
-}
+BurgerConstructor.propTypes = dataPropTypes;
 
 export default BurgerConstructor;

@@ -39,8 +39,9 @@ const Modal = (props) => {
     )
 }
 
-ModalOverlay.propTypes = {
-    onClose: PropTypes.func
+Modal.propTypes = {
+    onClose: PropTypes.func,
+    modalTitle: PropTypes.string
 }
 
 export default Modal;

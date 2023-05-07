@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Modal from '../modal/modal';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import ingredientStyles from './ingredient.module.css';
-import { CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
+import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 
 const Ingredient = (props) => {
@@ -14,7 +14,9 @@ const Ingredient = (props) => {
         document.body.style.overflow = 'hidden';
     }
 
-    function handleCloseModal() {
+    function handleCloseModal(e) {
+        if (e.type === 'keydown' && e.key !== 'Escape') return;
+
         toggleModal(false);
         document.body.style.overflow = '';
     }
@@ -45,18 +47,10 @@ const Ingredient = (props) => {
     )
 }
 
-Modal.propTypes = {
-    onClose: PropTypes.func,
-    modalTitle: PropTypes.string
-}
-
-IngredientDetails.propTypes = {
-    name: PropTypes.string,
-    image: PropTypes.string,
-    calories: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    carbohydrates: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    fat: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    proteins: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+Ingredient.propTypes = {
+    image: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
 }
 
 export default Ingredient;

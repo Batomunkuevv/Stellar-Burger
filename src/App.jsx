@@ -1,31 +1,28 @@
-import { useCallback, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
+import getIngredients from './utils/burger-api';
 import AppHeader from "./components/app-header/app-header";
 import BurgerConstructor from "./components/burger-constructor/burger-constructor";
 import BurgerIngredients from "./components/burger-ingredients/burger-ingredients";
 
 const App = () => {
-    const DOMAIN = 'https://norma.nomoreparties.space';
-
     const [state, setState] = useState({
         hasError: false,
         isLoading: false,
         data: []
     })
 
-    const getIngredients = useCallback(() => {
+    useEffect(() => {
         setState({ ...state, hasError: false, isLoading: true });
 
-        fetch(`${DOMAIN}/api/ingredients`)
-            .then(response => response.json())
-            .then(result => setState({ ...state, data: result.data, isLoading: false, hasError: false }))
-            .catch(error => {
-                setState({ ...state, hasError: true, isLoading: false });
-            });
-    }, []);
-
-    useEffect(() => {
-        getIngredients();
+        getIngredients()
+            .then(result => {
+                if(typeof result === 'object'){
+                    setState({ ...state, data: result.data, isLoading: false, hasError: false });
+                } else{
+                    setState({ ...state, isLoading: false, hasError: true });
+                }
+            })
+            ;
     }, [])
 
     const { data, isLoading, hasError } = state;
@@ -50,12 +47,5 @@ const App = () => {
 
 }
 
-BurgerIngredients.propTypes = {
-    data: PropTypes.array
-}
-
-BurgerConstructor.propTypes = {
-    data: PropTypes.array
-}
 
 export default App;

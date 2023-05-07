@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
-import PropTypes from 'prop-types';
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import Ingredient from "../ingredient/ingredient";
 import burgerIngredientsStyles from "./burger-ingredients.module.css";
+import dataPropTypes from '../../utils/data';
 
 const BurgerIngredients = ({ data }) => {
     const buns = useMemo(() => data.filter((item) => item.type === 'bun'), [data]);
@@ -41,5 +41,6 @@ const BurgerIngredients = ({ data }) => {
     );
 }
 
+BurgerIngredients.propTypes = dataPropTypes;
 
 export default BurgerIngredients;
