@@ -1,4 +1,4 @@
-const NORMA_API = "https://norma.nomoreparties.space";
+const NORMA_API = "https://norma.nomoreparties.spacce";
 
 const getIngredients = () => {
     return fetch(`${NORMA_API}/api/ingredients`)

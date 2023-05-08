@@ -13,7 +13,9 @@ const BurgerConstructor = () => {
         document.body.style.overflow = 'hidden';
     }
 
-    function handleCloseModal() {
+    function handleCloseModal(e) {
+        if (e.type === 'keydown' && e.key !== 'Escape') return;
+
         toggleModal(false);
         document.body.style.overflow = '';
     }

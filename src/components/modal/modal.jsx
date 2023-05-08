@@ -22,7 +22,7 @@ const Modal = (props) => {
             <>
                 <div className={`${modalStyles.modal} pt-10 pb-15 pl-10 pr-10`}>
                     <div className={`${modalStyles.modal__header}`}>
-                        {props.children && (
+                        {props.modalTitle && (
                             <h2 className={`${modalStyles.modal__title} text text_type_main-large`}>
                                 {props.modalTitle}
                             </h2>
@@ -40,7 +40,7 @@ const Modal = (props) => {
 }
 
 Modal.propTypes = {
-    onClose: PropTypes.func,
+    onClose: PropTypes.func.isRequired,
     modalTitle: PropTypes.string
 }
 
