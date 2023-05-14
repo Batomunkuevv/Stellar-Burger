@@ -1,9 +1,9 @@
 const NORMA_API = "https://norma.nomoreparties.space";
 
 export const getIngredients = async () => {
-    let response = await fetch(`${NORMA_API}/api/ingredients`);
+    const response = await fetch(`${NORMA_API}/api/ingredients`);
 
-    let result = await checkReponse(response);
+    const result = await checkReponse(response);
 
     if (result?.success) return result.data;
 
@@ -17,7 +17,7 @@ export const getOrderNumber = async (constructorIngredients) => {
         ingredients: ingredientsIds,
     };
 
-    let response = await fetch(`${NORMA_API}/api/orders`, {
+    const response = await fetch(`${NORMA_API}/api/orders`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -25,7 +25,7 @@ export const getOrderNumber = async (constructorIngredients) => {
         body: JSON.stringify(body),
     });
 
-    let result = await checkReponse(response);
+    const result = await checkReponse(response);
 
     if (result?.success) return result.order.number;
 

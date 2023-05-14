@@ -1,3 +1,4 @@
+import React from 'react';
 import { useContext, useMemo, useRef, useState } from 'react';
 import styles from "./burger-ingredients.module.css";
 import IngredientsContext from '../../utils/appContext';

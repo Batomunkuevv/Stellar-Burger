@@ -27,4 +27,4 @@ IngredientCategory.propTypes = {
     ingredients: PropTypes.arrayOf(ingredientPropTypes).isRequired
 }
 
-export default IngredientCategory;
+export default React.memo(IngredientCategory);

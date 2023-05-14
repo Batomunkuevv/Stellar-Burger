@@ -47,9 +47,7 @@ const BurgerConstructor = () => {
             .then(setOrberNumber)
     }
 
-    function handleCloseModal(e) {
-        if (e.type === 'keydown' && e.key !== 'Escape') return;
-
+    function handleCloseModal() {
         toggleModal(false);
         document.body.classList.remove('lock');
     }
