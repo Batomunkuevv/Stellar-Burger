@@ -1,0 +1,40 @@
+.header {
+    background: #1c1c21;
+    box-shadow: 0px 24px 32px rgba(0, 0, 0, 0.04), 0px 16px 24px rgba(0, 0, 0, 0.04), 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04);
+}
+
+.header__body {
+    display: flex;
+    align-items: center;
+}
+
+.header__body > svg {
+    margin-left: 112px;
+}
+
+.header__link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+}
+
+.header__link span, .header__link svg{
+    transition: all 0.3s ease-in-out 0s;
+}
+
+.header__link:hover span{
+    color: #fff !important;
+}
+
+.header__link:hover svg{
+    fill: #fff !important;
+}
+
+.header__link:not(.text_color_inactive) {
+    color: #F2F2F3;
+}
+
+.header__link_profile {
+    margin-left: auto;
+}
