@@ -14,6 +14,7 @@ const OrderDetails = ({ orderNumber }) => {
     )
 }
 
+
 OrderDetails.propTypes = {
     orderNumber: PropTypes.number
 }

@@ -35,3 +35,4 @@ export const getOrderNumber = async (constructorIngredients) => {
 function checkReponse(response) {
     return response.ok ? response.json() : response.json().then((err) => Promise.reject(err));
 }
+
