@@ -16,6 +16,7 @@
 }
 
 .burger_constructor__list {
+    padding-left: 0;
     composes: burger_constructor__body;
     max-height: 464px;
     overflow: auto;
@@ -36,13 +37,14 @@
 }
 
 .burger_constructor__item {
+    width: 100%;
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
 .burger_constructor__drag {
-    cursor: pointer;
+    cursor: grabbing;
 }
 
 .burger_constructor__bottom {

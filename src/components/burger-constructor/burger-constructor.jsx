@@ -1,127 +1,111 @@
-import { useState } from 'react';
+import { useState, useContext, useReducer, useEffect, useMemo } from 'react';
 import { Button, CurrencyIcon, ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import IngredientsContext from '../../utils/appContext';
 import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
-import burgerConstructorStyles from './burger-constructor.module.css'
-import dataPropTypes from '../../utils/data';
+import styles from './burger-constructor.module.css'
+import { getOrderNumber } from '../../utils/burger-api';
+
+const totalPriceInitialState = { totalPrice: 0 };
+
+const reducer = (state, action) => {
+    state = totalPriceInitialState.totalPrice;
+
+    if (action.ingredients && action.bun) {
+        action.ingredients.forEach(ingredient => {
+            state += ingredient.price;
+        })
+
+        state += action.bun.price * 2
+
+        return { totalPrice: state };
+    } else {
+        throw new Error('Ошибка в получении ингредиентов');
+    }
+}
 
 const BurgerConstructor = () => {
-    const [visibleModal, toggleModal] = useState(false);
+    const constructorIngredients = useContext(IngredientsContext);
+
+    const bun = useMemo(() => {
+        return constructorIngredients.find(ingredient => ingredient.type === 'bun')
+    }, [constructorIngredients]);
+
+    const ingredients = useMemo(() => {
+        return constructorIngredients.filter(ingredient => ingredient.type !== 'bun')
+    }, [constructorIngredients]);
+
+    const [totalPriceState, dispatcherTotalPrice] = useReducer(reducer, totalPriceInitialState, undefined);
+    const [isOrderModalOpen, toggleModal] = useState(false);
+    const [orderNumber, setOrberNumber] = useState(null);
 
     function handleOpenModal() {
         toggleModal(true);
-        document.body.style.overflow = 'hidden';
+        document.body.classList.add('lock');
+
+        getOrderNumber([...ingredients, bun])
+            .then(setOrberNumber)
     }
 
-    function handleCloseModal(e) {
-        if (e.type === 'keydown' && e.key !== 'Escape') return;
-
+    function handleCloseModal() {
         toggleModal(false);
-        document.body.style.overflow = '';
+        document.body.classList.remove('lock');
     }
 
-    const modal = (
-        <Modal onClose={handleCloseModal}>
-            <OrderDetails />
-        </Modal>
-    )
+    useEffect(() => {
+        dispatcherTotalPrice({ ingredients: ingredients, bun: bun });
+    }, [constructorIngredients, bun])
 
     return (
-        <div className={`${burgerConstructorStyles.burger_constructor} pt-25`}>
-            <div className={`${burgerConstructorStyles.burger_constructor__body} mb-10`}>
+        <div className={`${styles.burger_constructor} pt-25`}>
+            <div className={`${styles.burger_constructor__body} mb-10`}>
                 <ConstructorElement
                     type="top"
                     isLocked={true}
-                    text="Краторная булка N-200i (верх)"
-                    price={20}
-                    thumbnail={'https://code.s3.yandex.net/react/code/bun-02.png'}
+                    text={`${bun.name} (верх)`}
+                    price={bun.price}
+                    thumbnail={bun.image}
                     extraClass="mr-4"
                 />
-                <div className={`${burgerConstructorStyles.burger_constructor__list} pr-2`}>
-                    <div className={`${burgerConstructorStyles.burger_constructor__item}`}>
-                        <div className={`${burgerConstructorStyles.burger_constructor__drag}`}>
-                            <DragIcon />
-                        </div>
-                        <ConstructorElement
-                            text="Соус традиционный галактический"
-                            price={30}
-                            thumbnail={'https://code.s3.yandex.net/react/code/sauce-03.png'}
-                        />
-                    </div>
-                    <div className={`${burgerConstructorStyles.burger_constructor__item}`}>
-                        <div className={`${burgerConstructorStyles.burger_constructor__drag}`}>
-                            <DragIcon />
-                        </div>
-                        <ConstructorElement
-                            text="Мясо бессмертных моллюсков Protostomia"
-                            price={300}
-                            thumbnail={'https://code.s3.yandex.net/react/code/meat-02.png'}
-                        />
-                    </div>
-                    <div className={`${burgerConstructorStyles.burger_constructor__item}`}>
-                        <div className={`${burgerConstructorStyles.burger_constructor__drag}`}>
-                            <DragIcon />
-                        </div>
-                        <ConstructorElement
-                            text="Плоды Фалленианского дерева"
-                            price={80}
-                            thumbnail={'https://code.s3.yandex.net/react/code/sp_1.png'}
-                        />
-                    </div>
-                    <div className={`${burgerConstructorStyles.burger_constructor__item}`}>
-                        <div className={`${burgerConstructorStyles.burger_constructor__drag}`}>
-                            <DragIcon />
-                        </div>
-                        <ConstructorElement
-                            text="Хрустящие минеральные кольца"
-                            price={80}
-                            thumbnail={'https://code.s3.yandex.net/react/code/mineral_rings.png'}
-                        />
-                    </div>
-                    <div className={`${burgerConstructorStyles.burger_constructor__item}`}>
-                        <div className={`${burgerConstructorStyles.burger_constructor__drag}`}>
-                            <DragIcon />
-                        </div>
-                        <ConstructorElement
-                            text="Хрустящие минеральные кольца"
-                            price={80}
-                            thumbnail={'https://code.s3.yandex.net/react/code/mineral_rings.png'}
-                        />
-                    </div>
-                    <div className={`${burgerConstructorStyles.burger_constructor__item}`}>
-                        <div className={`${burgerConstructorStyles.burger_constructor__drag}`}>
-                            <DragIcon />
-                        </div>
-                        <ConstructorElement
-                            text="Хрустящие минеральные кольца"
-                            price={80}
-                            thumbnail={'https://code.s3.yandex.net/react/code/mineral_rings.png'}
-                        />
-                    </div>
-                </div>
+                <ul className={`${styles.burger_constructor__list} pr-2`}>
+                    {ingredients.map((ingredient, index) => (
+                        <li className={`${styles.burger_constructor__item}`} key={index}>
+                            <div className={`${styles.burger_constructor__drag}`}>
+                                <DragIcon />
+                            </div>
+                            <ConstructorElement
+                                text={ingredient.name}
+                                price={ingredient.price}
+                                thumbnail={ingredient.image}
+                            />
+                        </li>
+                    ))}
+                </ul>
                 <ConstructorElement
                     type="bottom"
                     isLocked={true}
-                    text="Краторная булка N-200i (низ)"
-                    price={20}
-                    thumbnail={'https://code.s3.yandex.net/react/code/bun-02.png'}
+                    text={`${bun.name} (низ)`}
+                    price={bun.price}
+                    thumbnail={bun.image}
                     extraClass="mr-4"
                 />
             </div>
-            <div className={`${burgerConstructorStyles.burger_constructor__bottom} mr-4`}>
-                <div className={`${burgerConstructorStyles.burger_constructor__total_price} mr-10`}>
-                    <p className="text text_type_digits-medium mr-2">610</p>
+            <div className={`${styles.burger_constructor__bottom} mr-4`}>
+                <div className={`${styles.burger_constructor__total_price} mr-10`}>
+                    <p className="text text_type_digits-medium mr-2">{totalPriceState.totalPrice}</p>
                     <CurrencyIcon type="primary" />
                 </div>
                 <Button onClick={handleOpenModal} htmlType="button" type="primary" size="large">
                     Оформить заказ
                 </Button>
             </div>
-            {visibleModal && modal}
+            {isOrderModalOpen &&
+                <Modal onClose={handleCloseModal}>
+                    <OrderDetails orderNumber={orderNumber} />
+                </Modal>
+            }
         </div>
     )
 }
-
-BurgerConstructor.propTypes = dataPropTypes;
 
 export default BurgerConstructor;

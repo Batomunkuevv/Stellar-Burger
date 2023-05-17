@@ -1,43 +1,32 @@
 import { useEffect, useState } from 'react';
-import getIngredients from './utils/burger-api';
+import { getIngredients } from './utils/burger-api';
+import AppContext from './utils/appContext';
 import AppHeader from "./components/app-header/app-header";
 import BurgerConstructor from "./components/burger-constructor/burger-constructor";
 import BurgerIngredients from "./components/burger-ingredients/burger-ingredients";
 
 const App = () => {
-    const [state, setState] = useState({
-        hasError: false,
-        isLoading: false,
-        data: []
-    })
+    const [ingredients, setIngredients] = useState([]);
+    const [ingredientsIsloading, setIngredientsLoading] = useState(true);
 
     useEffect(() => {
-        setState({ ...state, hasError: false, isLoading: true });
-
         getIngredients()
-            .then(result => {
-                if(typeof result === 'object'){
-                    setState({ ...state, data: result.data, isLoading: false, hasError: false });
-                } else{
-                    setState({ ...state, isLoading: false, hasError: true });
-                }
-            })
-            ;
+            .then(setIngredients)
+            .catch(() => alert('Во время загрузки ингредиентов произошла ошибка'))
+            .finally(() => setIngredientsLoading(false))
     }, [])
-
-    const { data, isLoading, hasError } = state;
 
     return (
         <>
             <AppHeader />
             <main className="page">
                 <div className="container">
-                    {isLoading && 'Загрузка...'}
-                    {hasError && 'Произошла ошибка'}
-                    {!hasError && !isLoading && (
+                    {ingredientsIsloading ? 'Загрузка...' : (
                         <div className="page__body pl-5 pr-5">
-                            <BurgerIngredients data={data} />
-                            <BurgerConstructor data={data} />
+                            <AppContext.Provider value={ingredients}>
+                                <BurgerIngredients />
+                                <BurgerConstructor />
+                            </AppContext.Provider>
                         </div>
                     )}
                 </div>

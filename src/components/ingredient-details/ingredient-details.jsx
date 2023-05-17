@@ -1,31 +1,33 @@
-import PropTypes from 'prop-types';
-import ingredientDetailsStyles from './ingredient-details.module.css';
+import ingredientPropTypes from '../../utils/ingredientPropTypes';
+import styles from './ingredient-details.module.css';
 
-const IngredientDetails = (props) => {
+const IngredientDetails = ({ ingredientData }) => {
+    const { image_large, name, calories, proteins, fat, carbohydrates } = ingredientData;
+
     return (
         <div className='ingredient-details'>
-            <div className={`${ingredientDetailsStyles['ingredient-details__image']} mb-3`}>
-                <img src={props.image} alt={props.name} title={props.name} />
+            <div className={`${styles['ingredient-details__image']} mb-3`}>
+                <img src={image_large} alt={name} title={name} />
             </div>
-            <div className={`${ingredientDetailsStyles['ingredient-details__name']} text text_type_main-medium mb-8`}>
-                {props.name}
+            <div className={`${styles['ingredient-details__name']} text text_type_main-medium mb-8`}>
+                {name}
             </div>
-            <ul className={`${ingredientDetailsStyles['ingredient-details__nutrients']}`}>
-                <li className={`${ingredientDetailsStyles['ingredient-details__nutrient']}`}>
-                    <span className={`${ingredientDetailsStyles['ingredient-details__nutrient-caption']} text text_type_main-default text_color_inactive mb-2`}>Калории,ккал</span>
-                    <span className={`${ingredientDetailsStyles['ingredient-details__nutrient-value']} text text_type_digits-default text_color_inactive`}>{props.calories}</span>
+            <ul className={`${styles['ingredient-details__nutrients']}`}>
+                <li className={`${styles['ingredient-details__nutrient']}`}>
+                    <span className={`${styles['ingredient-details__nutrient-caption']} text text_type_main-default text_color_inactive mb-2`}>Калории,ккал</span>
+                    <span className={`${styles['ingredient-details__nutrient-value']} text text_type_digits-default text_color_inactive`}>{calories}</span>
                 </li>
-                <li className={`${ingredientDetailsStyles['ingredient-details__nutrient']}`}>
-                    <span className={`${ingredientDetailsStyles['ingredient-details__nutrient-caption']} text text_type_main-default text_color_inactive mb-2`}>Белки, г</span>
-                    <span className={`${ingredientDetailsStyles['ingredient-details__nutrient-value']} text text_type_digits-default text_color_inactive`}>{props.proteins}</span>
+                <li className={`${styles['ingredient-details__nutrient']}`}>
+                    <span className={`${styles['ingredient-details__nutrient-caption']} text text_type_main-default text_color_inactive mb-2`}>Белки, г</span>
+                    <span className={`${styles['ingredient-details__nutrient-value']} text text_type_digits-default text_color_inactive`}>{proteins}</span>
                 </li>
-                <li className={`${ingredientDetailsStyles['ingredient-details__nutrient']}`}>
-                    <span className={`${ingredientDetailsStyles['ingredient-details__nutrient-caption']} text text_type_main-default text_color_inactive mb-2`}>Жиры, г</span>
-                    <span className={`${ingredientDetailsStyles['ingredient-details__nutrient-value']} text text_type_digits-default text_color_inactive`}>{props.fat}</span>
+                <li className={`${styles['ingredient-details__nutrient']}`}>
+                    <span className={`${styles['ingredient-details__nutrient-caption']} text text_type_main-default text_color_inactive mb-2`}>Жиры, г</span>
+                    <span className={`${styles['ingredient-details__nutrient-value']} text text_type_digits-default text_color_inactive`}>{fat}</span>
                 </li>
-                <li className={`${ingredientDetailsStyles['ingredient-details__nutrient']}`}>
-                    <span className={`${ingredientDetailsStyles['ingredient-details__nutrient-caption']} text text_type_main-default text_color_inactive mb-2`}>Углеводы, г</span>
-                    <span className={`${ingredientDetailsStyles['ingredient-details__nutrient-value']} text text_type_digits-default text_color_inactive`}>{props.carbohydrates}</span>
+                <li className={`${styles['ingredient-details__nutrient']}`}>
+                    <span className={`${styles['ingredient-details__nutrient-caption']} text text_type_main-default text_color_inactive mb-2`}>Углеводы, г</span>
+                    <span className={`${styles['ingredient-details__nutrient-value']} text text_type_digits-default text_color_inactive`}>{carbohydrates}</span>
                 </li>
             </ul>
         </div>
@@ -33,12 +35,7 @@ const IngredientDetails = (props) => {
 }
 
 IngredientDetails.propTypes = {
-    name: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
-    calories: PropTypes.number.isRequired,
-    carbohydrates: PropTypes.number.isRequired,
-    fat: PropTypes.number.isRequired,
-    proteins: PropTypes.number.isRequired
+    ingredientData: ingredientPropTypes
 }
 
 export default IngredientDetails;

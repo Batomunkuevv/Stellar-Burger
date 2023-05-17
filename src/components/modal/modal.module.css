@@ -23,6 +23,8 @@
 }
 
 .modal__close {
+    background: unset;
+    border: unset;
     margin-left: auto;
     cursor: pointer;
 }
