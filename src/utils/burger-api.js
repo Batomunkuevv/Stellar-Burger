@@ -1,6 +1,6 @@
 const NORMA_API = "https://norma.nomoreparties.space";
 
-export const getIngredients = async () => {
+export const getIngredientsRequest = async () => {
     const response = await fetch(`${NORMA_API}/api/ingredients`);
 
     const result = await checkReponse(response);
@@ -10,13 +10,13 @@ export const getIngredients = async () => {
     return Promise.reject(result);
 };
 
-export const getOrderNumber = async (constructorIngredients) => {
-    const ingredientsIds = constructorIngredients.map((ingredient) => ingredient._id);
+export const getOrderRequest = async (constructorIngredients) => {
+    const ingredientsIds = constructorIngredients?.map((ingredient) => ingredient._id);
 
     const body = {
         ingredients: ingredientsIds,
     };
-
+    
     const response = await fetch(`${NORMA_API}/api/orders`, {
         method: "POST",
         headers: {
@@ -27,7 +27,7 @@ export const getOrderNumber = async (constructorIngredients) => {
 
     const result = await checkReponse(response);
 
-    if (result?.success) return result.order.number;
+    if (result?.success) return result.order;
 
     return Promise.reject(result);
 };
