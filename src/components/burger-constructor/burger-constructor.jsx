@@ -6,10 +6,12 @@ import styles from './burger-constructor.module.css'
 import { getOrder } from '../../services/redux/actions/order';
 import { ADD_CONSTRUCTOR_BUN, ADD_CONSTRUCTOR_INGREDIENT } from '../../services/redux/actions/constructor';
 import { INCREMENT_INGREDIENT, DECREMENT_INGREDIENT } from '../../services/redux/actions/ingredients';
+import { CLEAR_ORDER } from '../../services/redux/actions/order'
+
+import { Button, CurrencyIcon, ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
 import ConstructorIngredientsList from '../constructor-ingredients-list/constructor-ingredients-list';
-import { Button, CurrencyIcon, ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import loadingBun from '../../images/loading-bun.svg';
 
 const totalPriceInitialState = { totalPrice: 0 };
@@ -60,7 +62,7 @@ const BurgerConstructor = () => {
                 dispatch({ type: DECREMENT_INGREDIENT, payload: bun })
             }
         } else {
-            dispatch({ type: ADD_CONSTRUCTOR_INGREDIENT, payload: {...item, handlerId: uuidv()} })
+            dispatch({ type: ADD_CONSTRUCTOR_INGREDIENT, payload: { ...item, handlerId: uuidv() } })
         }
 
         dispatch({ type: INCREMENT_INGREDIENT, payload: item })
@@ -76,6 +78,7 @@ const BurgerConstructor = () => {
     const handleCloseModal = () => {
         toggleModal(false);
         document.body.classList.remove('lock');
+        dispatch({ type: CLEAR_ORDER })
     }
 
     useEffect(() => {
@@ -136,7 +139,7 @@ const BurgerConstructor = () => {
                     <p className="text text_type_digits-medium mr-2">{totalPriceState.totalPrice}</p>
                     <CurrencyIcon type="primary" />
                 </div>
-                <Button onClick={handleOpenModal} htmlType="button" type="primary" size="large">
+                <Button disabled={!bun ? true : false} onClick={handleOpenModal} htmlType="button" type="primary" size="large">
                     Оформить заказ
                 </Button>
             </div>

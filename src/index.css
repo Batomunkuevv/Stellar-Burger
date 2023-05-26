@@ -19,13 +19,6 @@ body.lock{
     max-width: 1280px;
 }
 
-.page__body {
-    display: grid;
-    grid-template-columns: 1fr 568px;
-    align-items: start;
-    gap: 56px;
-}
-
 img{
     max-width: 100%;
 }

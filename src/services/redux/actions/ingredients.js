@@ -5,6 +5,7 @@ export const GET_INGREDEINTS_FAILED = "GET_INGREDEINTS_FAILED";
 export const GET_INGREDEINTS_SUCCESS = "GET_INGREDEINTS_SUCCESS";
 export const INCREMENT_INGREDIENT = "INCREMENT_INGREDIENT";
 export const DECREMENT_INGREDIENT = "DECREMENT_INGREDIENT";
+export const RESET_INGREDIENTS_COUNTERS = "RESET_INGREDIENTS_COUNTERS";
 
 export function getIngredients() {
     return (dispatch) => {
@@ -14,7 +15,7 @@ export function getIngredients() {
 
         getIngredientsRequest()
             .then((res) => {
-                res = res.map(item => {
+                const ingredients = res.data.map(item => {
                     return {
                         ...item,
                         counter: 0
@@ -24,7 +25,7 @@ export function getIngredients() {
                 dispatch({
                     type: GET_INGREDEINTS_SUCCESS,
                     payload: {
-                        ingredients: res,
+                        ingredients: ingredients,
                     },
                 });
             })

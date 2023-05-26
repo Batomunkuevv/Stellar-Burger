@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import styles from './order-details.module.css';
 import { useSelector } from 'react-redux';
 
@@ -14,7 +13,7 @@ const OrderDetails = () => {
                 (orderRequest ? (
                     <Preloader />
                 ) : orderFailed ? (
-                    'Произошла ошибка в получении заказа'
+                    'Произошла ошибка при отправке заказа'
                 ) : (
                     <div className={`${styles['order-details']} pt-4 pb-20`}>
                         <div className="order-details__number text text_type_digits-large mb-8">{order.number}</div>
@@ -27,11 +26,6 @@ const OrderDetails = () => {
             }
         </>
     )
-}
-
-
-OrderDetails.propTypes = {
-    orderNumber: PropTypes.number
 }
 
 export default OrderDetails;

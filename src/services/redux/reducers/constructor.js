@@ -1,4 +1,4 @@
-import { ADD_CONSTRUCTOR_INGREDIENT, ADD_CONSTRUCTOR_BUN, REMOVE_CONSTRUCTOR_INGREDIENT, UPDATE_CONSTRUCTOR_LIST } from '../actions/constructor';
+import { ADD_CONSTRUCTOR_INGREDIENT, ADD_CONSTRUCTOR_BUN, REMOVE_CONSTRUCTOR_INGREDIENT, UPDATE_CONSTRUCTOR_LIST, CLEAR_CONSTRUCTOR } from '../actions/constructor';
 
 const initialStore = {
     ingredients: [],
@@ -27,11 +27,16 @@ export const constructorReducer = (store = initialStore, action) => {
             }
         }
         case UPDATE_CONSTRUCTOR_LIST: {
-                return {
-                    ...store,
-                    ingredients: action.payload
-                }
+            return {
+                ...store,
+                ingredients: action.payload
             }
+        }
+        case CLEAR_CONSTRUCTOR: {
+            return {
+                ...initialStore
+            }
+        }
         default: {
             return store;
         }

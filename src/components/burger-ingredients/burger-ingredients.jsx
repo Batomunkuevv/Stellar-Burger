@@ -48,7 +48,7 @@ const BurgerIngredients = () => {
             entries.forEach((entry) => {
                 const { isIntersecting, target, intersectionRatio } = entry;
                 const titleTab = target.dataset.tab;
-                console.log(intersectionRatio);
+
                 if (isIntersecting && intersectionRatio === 1) {
                     setCurrentTab(titleTab);
                 }

@@ -1,4 +1,4 @@
-import { GET_ORDER_FAILED, GET_ORDER_REQUEST, GET_ORDER_SUCCESS } from "../actions/order";
+import { GET_ORDER_FAILED, GET_ORDER_REQUEST, GET_ORDER_SUCCESS, CLEAR_ORDER } from "../actions/order";
 
 const initialStore = {
     order: null,
@@ -28,6 +28,12 @@ export const orderDetailsReducer = (store = initialStore, action) => {
                 orderRequest: false,
                 orderFailed: true,
             };
+        }
+        case CLEAR_ORDER: {
+            return {
+                ...store,
+                order: initialStore.order
+            }
         }
         default: {
             return store;

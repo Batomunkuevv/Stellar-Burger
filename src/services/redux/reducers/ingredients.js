@@ -1,4 +1,4 @@
-import { GET_INGREDEINTS_REQUEST, GET_INGREDEINTS_SUCCESS, GET_INGREDEINTS_FAILED, INCREMENT_INGREDIENT, DECREMENT_INGREDIENT } from "../actions/ingredients";
+import { GET_INGREDEINTS_REQUEST, GET_INGREDEINTS_SUCCESS, GET_INGREDEINTS_FAILED, INCREMENT_INGREDIENT, DECREMENT_INGREDIENT, RESET_INGREDIENTS_COUNTERS } from "../actions/ingredients";
 
 const initialStore = {
     ingredients: [],
@@ -32,7 +32,7 @@ export const ingredientsReducer = (store = initialStore, action) => {
             const { _id, type } = action.payload;
 
             const incrementIngredients = store.ingredients.map(item => {
-                if(type === 'bun' && item._id === _id){
+                if (type === 'bun' && item._id === _id) {
                     return {
                         ...item,
                         counter: item.counter += 2
@@ -58,7 +58,7 @@ export const ingredientsReducer = (store = initialStore, action) => {
             const { _id, type } = action.payload;
 
             const decrementIngredients = store.ingredients.map(item => {
-                if(type === 'bun' && item._id === _id){
+                if (type === 'bun' && item._id === _id) {
                     return {
                         ...item,
                         counter: item.counter -= 2
@@ -78,6 +78,12 @@ export const ingredientsReducer = (store = initialStore, action) => {
             return {
                 ...store,
                 ingredients: decrementIngredients
+            }
+        }
+        case RESET_INGREDIENTS_COUNTERS: {
+            return {
+                ...store,
+                ingredients: store.ingredients.map(ingredient => ({...ingredient, counter: 0}))
             }
         }
         default: {
