@@ -1,0 +1,10 @@
+.preloader {
+    width: 96px;
+    height: 96px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.preloader--ingredients{
+    margin-top: 64px;
+}

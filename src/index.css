@@ -19,8 +19,6 @@ body.lock{
     max-width: 1280px;
 }
 
-.page__body {
-    display: flex;
-    align-items: start;
-    gap: 56px;
+img{
+    max-width: 100%;
 }

@@ -2,11 +2,26 @@
     position: relative;
     min-height: 208px;
     cursor: pointer;
+    color: #fff;
+    transition: all 0.3s ease-in-out 0s;
+}
+
+.ingredient:hover {
+    color: #4c4cff;
+}
+
+.ingredient:hover svg {
+    fill: #4c4cff;
+}
+
+.ingredient:hover .ingredient__img {
+    transform: scale(1.1);
 }
 
 .ingredient__img {
     height: 120px;
     text-align: center;
+    transition: all 0.3s ease-in-out 0s;
 }
 
 .ingredient__img img {
@@ -19,8 +34,14 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
+    color: inherit;
+}
+
+.ingredient__currency svg {
+    transition: all 0.3s ease-in-out 0s;
 }
 
 .ingredient__name {
     text-align: center;
+    color: inherit;
 }
