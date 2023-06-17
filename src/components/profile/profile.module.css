@@ -1,0 +1,34 @@
+.profile {
+    padding-top: 120px;
+    display: flex;
+    align-items: start;
+    gap: 60px;
+}
+
+.profile__left {
+    max-width: 320px;
+}
+
+.profile__links {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile__link {
+    min-height: 64px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out 0s;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.is-active{
+    color: #fff;
+}
+
+.profile__link:hover{
+    color: #fff;
+}
