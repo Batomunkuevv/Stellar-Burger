@@ -1,30 +1,34 @@
 import { v4 as uuidv } from 'uuid';
 import { useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useDrop } from 'react-dnd';
 import styles from './burger-constructor.module.css'
 import { getOrder } from '../../services/redux/order-details/actions';
-import { IngredientsTypes } from '../../services/redux/ingredients/actions';
 import { ConstructorTypes } from '../../services/redux/constructor/actions';
 import { OrderDetailsTypes } from '../../services/redux/order-details/actions';
+import { getUser } from '../../services/redux/user/selectors';
+import { getConstructorItems } from '../../services/redux/constructor/selectors';
 
-import { Button, CurrencyIcon, ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
+import { Button, CurrencyIcon, InfoIcon, ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
 import ConstructorIngredientsList from '../constructor-ingredients-list/constructor-ingredients-list';
 import loadingBun from '../../images/loading-bun.svg';
+import classNames from 'classnames';
 
 const BurgerConstructor = () => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const { ingredients, bun } = useSelector(store => store.burgerConstructor);
-    const user = useSelector(store => store.user.data);
+    const { constructorIngredients, bun } = useSelector(getConstructorItems);
+    const user = useSelector(getUser);
 
     const totalPrice = useMemo(() => {
-        return (bun ? bun.price * 2 : 0) + ingredients.reduce((acc, ingredient) => {
+        return (bun ? bun.price * 2 : 0) + constructorIngredients.reduce((acc, ingredient) => {
             return acc += ingredient.price;
         }, 0)
-    }, [ingredients, bun])
+    }, [constructorIngredients, bun])
 
     const [isOrderModalOpen, toggleModal] = useState(false);
 
@@ -43,22 +47,21 @@ const BurgerConstructor = () => {
 
         if (isBun) {
             dispatch({ type: ConstructorTypes.ADD_BUN, payload: item })
-
-            if (bun) {
-                dispatch({ type: IngredientsTypes.DECREMENT, payload: bun })
-            }
         } else {
             dispatch({ type: ConstructorTypes.ADD_INGREDIENT, payload: { ...item, handlerId: uuidv() } })
         }
-
-        dispatch({ type: IngredientsTypes.INCREMENT, payload: item })
     }
 
-    const handleOpenModal = () => {
-        toggleModal(true);
-        document.body.classList.add('lock');
+    const handleBtnClick = () => {
+        if (!user) {
+            navigate('/login')
+        } else {
 
-        dispatch(getOrder([bun, ...ingredients, bun]));
+            toggleModal(true);
+            document.body.classList.add('lock');
+
+            dispatch(getOrder([bun, ...constructorIngredients, bun]));
+        }
     }
 
     const handleCloseModal = () => {
@@ -69,7 +72,7 @@ const BurgerConstructor = () => {
 
     return (
         <div className={`${styles['burger-constructor']}`}>
-            <div ref={constructorTarget} className={`${styles.burger_constructor__body} ${isHover ? styles['is-hover'] : ''} mb-4`}>
+            <div ref={constructorTarget} className={classNames(styles['burger-constructor__body'], { [styles['is-hover']]: isHover }, 'mb-4')}>
                 {(bun ? (
                     <ConstructorElement
                         type="top"
@@ -89,7 +92,7 @@ const BurgerConstructor = () => {
                         extraClass="mr-4"
                     />
                 ))}
-                {ingredients.length ? (
+                {constructorIngredients.length ? (
                     <ConstructorIngredientsList />
                 ) : (
                     <div className={`${styles['burger-constructor__trigger']} text text_type_main-medium`}>
@@ -116,15 +119,21 @@ const BurgerConstructor = () => {
                     />
                 ))}
             </div>
-            <div className={`${styles.burger_constructor__bottom} mr-4`}>
-                <div className={`${styles.burger_constructor__total_price} mr-10`}>
+            <div className={`${styles['burger-constructor__bottom']} mr-4 mb-6`}>
+                <div className={`${styles['burger-constructor__total-price']} mr-10`}>
                     <p className="text text_type_digits-medium mr-2">{totalPrice}</p>
                     <CurrencyIcon type="primary" />
                 </div>
-                <Button disabled={!user || !bun ? true : false} onClick={handleOpenModal} htmlType="button" type="primary" size="large">
+                <Button disabled={!bun} onClick={handleBtnClick} htmlType="button" type="primary" size="large">
                     Оформить заказ
                 </Button>
             </div>
+            {!user && (
+                <div className={classNames(styles['burger-constructor__hint'], { [styles['is-visible']]: bun }, 'text', ' text_type_main-small')}>
+                    <InfoIcon />
+                    Войдите в аккаунт, чтобы оформить заказ
+                </div>
+            )}
             {isOrderModalOpen &&
                 <Modal onClose={handleCloseModal}>
                     <OrderDetails />

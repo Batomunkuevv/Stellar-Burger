@@ -1,11 +1,12 @@
 import { Navigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Preloader from "../components/preloader/preloader";
+import { getIsAuthChecked, getUser } from "../services/redux/user/selectors";
 
 const ProtectedRouteElement = ({ onlyUnAuth = false, children}) => {
     const location = useLocation();
-    const user = useSelector(store => store.user.data);
-    const isAuthChecked = useSelector(store => store.user.isAuthChecked);
+    const user = useSelector(getUser);
+    const isAuthChecked = useSelector(getIsAuthChecked);
 
     if (!isAuthChecked) return <Preloader />
 

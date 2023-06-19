@@ -3,9 +3,12 @@ import { useSelector } from 'react-redux';
 
 import CheckIcon from '../../images/check.svg';
 import Preloader from '../preloader/preloader';
+import { getOrder, getOrderFailed, getOrderRequest } from '../../services/redux/order-details/selectors';
 
 const OrderDetails = () => {
-    const { orderFailed, orderRequest, order } = useSelector(store => store.orderDetails);
+    const order = useSelector(getOrder);
+    const orderRequest = useSelector(getOrderRequest);
+    const orderFailed = useSelector(getOrderFailed);
 
     return (
         <>

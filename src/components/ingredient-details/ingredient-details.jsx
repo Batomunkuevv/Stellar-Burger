@@ -1,13 +1,16 @@
 import styles from './ingredient-details.module.css';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { getIngredients, getIngredientsFailed, getIngredientsRequest } from '../../services/redux/ingredients/selectors';
 
 import Preloader from '../preloader/preloader';
 
 const IngredientDetails = () => {
     const { ingredientId } = useParams();
 
-    const { ingredients, ingredientsRequest, ingredientsFailed } = useSelector(store => store.ingredients);
+    const ingredients = useSelector(getIngredients);
+    const ingredientsRequest = useSelector(getIngredientsRequest);
+    const ingredientsFailed = useSelector(getIngredientsFailed);
 
     const ingredient = ingredients.find(ingredient => ingredient._id === ingredientId);
 

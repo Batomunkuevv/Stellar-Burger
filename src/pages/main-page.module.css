@@ -1,4 +1,5 @@
 .constructor-body {
+    margin-bottom: 48px;
     display: grid;
     grid-template-columns: 1fr 568px;
     align-items: start;

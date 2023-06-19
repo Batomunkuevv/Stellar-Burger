@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import { useRef } from 'react';
 import { useDrop, useDrag } from 'react-dnd';
 import styles from '../burger-constructor/burger-constructor.module.css'
-import { IngredientsTypes } from '../../services/redux/ingredients/actions';
 import { ConstructorTypes } from '../../services/redux/constructor/actions';
 import { useDispatch } from 'react-redux';
 
@@ -12,7 +11,6 @@ const ConstructorItem = ({ _id, name, type, price, image, index, handlerId, move
     const dispatch = useDispatch();
 
     const removeIngredient = () => {
-        dispatch({ type: IngredientsTypes.DECREMENT, payload: { _id, type } })
         dispatch({ type: ConstructorTypes.REMOVE_INGREDIENT, payload: handlerId })
     }
 
@@ -67,7 +65,7 @@ const ConstructorItem = ({ _id, name, type, price, image, index, handlerId, move
         <li draggable
             ref={constructorItemRef}
             style={{ opacity }}
-            onDrop={preventDefault} data-handler-id={handlerId} className={`${styles.burger_constructor__item}`}>
+            onDrop={preventDefault} data-handler-id={handlerId} className={`${styles['burger-constructor__item']}`}>
             <div className={`${styles.burger_constructor__drag}`}>
                 <DragIcon />
             </div>

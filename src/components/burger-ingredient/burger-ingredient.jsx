@@ -7,10 +7,10 @@ import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-c
 import { useDrag } from 'react-dnd';
 
 
-const BurgerIngredient = ({ ingredientData }) => {
+const BurgerIngredient = ({ ingredientData, count }) => {
     const location = useLocation();
 
-    const { name, image, price, counter, _id } = ingredientData;
+    const { name, image, price, _id } = ingredientData;
 
     const [{ opacity }, ingredientRef] = useDrag({
         type: 'ingredient',
@@ -23,9 +23,9 @@ const BurgerIngredient = ({ ingredientData }) => {
     })
 
     return (
-        <article style={{ opacity }}  draggable ref={ingredientRef} >
-            <Link className={`${styles.ingredient}`} to={`ingredients/${_id}`} state={{from: location}}>
-                <Counter count={counter} size="default" />
+        <article style={{ opacity }} draggable ref={ingredientRef} >
+            <Link className={`${styles.ingredient}`} to={`ingredients/${_id}`} state={{ from: location }}>
+                <Counter count={count} size="default" />
                 <div className={`${styles.ingredient__img} mb-2`}>
                     <img src={image} alt={name} title={name} />
                 </div>

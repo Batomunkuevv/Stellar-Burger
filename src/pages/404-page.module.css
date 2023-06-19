@@ -1,0 +1,22 @@
+.error-404 {
+    display: flex;
+    min-height: calc(100vh - 88px);
+}
+
+.error-404__background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    z-index: -1;
+}
+
+.error-404__body {
+    margin: auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}

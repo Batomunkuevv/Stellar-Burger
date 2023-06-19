@@ -1,9 +1,10 @@
+import styles from './user-info.module.css';
+import classNames from 'classnames';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector, } from "react-redux";
 import { updateUser } from "../../services/redux/user/actions";
-import styles from './user-info.module.css';
-import classNames from 'classnames';
+import { getUser } from '../../services/redux/user/selectors';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -12,7 +13,7 @@ import useForm from '../../hooks/use-form';
 
 const UserInfo = () => {
     const dispatch = useDispatch();
-    const user = useSelector(store => store.user.data);
+    const user = useSelector(getUser);
     const [isVisibleButtons, setVisibleButtons] = useState(false);
 
     let { values, handleChange, setValues } = useForm({
@@ -42,6 +43,7 @@ const UserInfo = () => {
     };
 
     const handleCancelChanging = () => {
+        setVisibleButtons(false);
         setValues({
             ...values,
             'name': user.name,

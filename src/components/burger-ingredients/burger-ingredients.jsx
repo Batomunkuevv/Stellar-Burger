@@ -5,10 +5,14 @@ import { useSelector } from 'react-redux';
 import Preloader from '../preloader/preloader';
 import Tabs from '../tabs/tabs';
 import IngredientsCategory from '../ingredients-category/ingredients-category';
+import { getIngredients, getIngredientsRequest, getIngredientsFailed } from '../../services/redux/ingredients/selectors';
 
 const BurgerIngredients = () => {
     const [currentTab, setCurrentTab] = useState('buns');
-    const { ingredients, ingredientsRequest, ingredientsFailed } = useSelector(store => store.ingredients);
+
+    const ingredients = useSelector(getIngredients);
+    const ingredientsRequest = useSelector(getIngredientsRequest);
+    const ingredientsFailed = useSelector(getIngredientsFailed);
 
     const {buns, mains, sauces} = useMemo(() => {
         return {

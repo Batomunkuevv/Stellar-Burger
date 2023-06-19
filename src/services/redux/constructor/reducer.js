@@ -1,7 +1,7 @@
 import { ConstructorTypes } from './actions';
 
 const initialStore = {
-    ingredients: [],
+    constructorIngredients: [],
     bun: null
 };
 
@@ -10,14 +10,14 @@ export const constructorReducer = (store = initialStore, action) => {
         case ConstructorTypes.ADD_INGREDIENT: {
             return {
                 ...store,
-                ingredients: [...store.ingredients, action.payload]
+                constructorIngredients: [...store.constructorIngredients, action.payload]
             }
         }
         case ConstructorTypes.REMOVE_INGREDIENT: {
 
             return {
                 ...store,
-                ingredients: [...store.ingredients.filter(ingredient => ingredient.handlerId !== action.payload)]
+                constructorIngredients: [...store.constructorIngredients.filter(ingredient => ingredient.handlerId !== action.payload)]
             }
         }
         case ConstructorTypes.ADD_BUN: {
@@ -29,7 +29,7 @@ export const constructorReducer = (store = initialStore, action) => {
         case ConstructorTypes.UPDATE_LIST: {
             return {
                 ...store,
-                ingredients: action.payload
+                constructorIngredients: action.payload
             }
         }
         case ConstructorTypes.CLEAR: {

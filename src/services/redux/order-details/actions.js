@@ -19,9 +19,8 @@ export const getOrder = (ingredients) => {
             .then((res) => {
                 dispatch({ type: OrderDetailsTypes.GET_SUCCESS, payload: res.order });
                 dispatch({ type: ConstructorTypes.CLEAR});
-                dispatch({ type: IngredientsTypes.RESET_INGREDIENTS_COUNTERS });
             })
-            .catch(() => {
+            .catch((error) => {
                 dispatch({ type: OrderDetailsTypes.GET_FAILED });
             });
     };

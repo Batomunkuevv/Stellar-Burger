@@ -7,20 +7,20 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    text-shadow: 0 0 7px #801AB2, 0 0 10px #801AB2, 0 0 21px #801AB2, 0 0 42px #4c4cff, 0 0 82px #4c4cff, 0 0 92px #4c4cff, 0 0 102px #4c4cff, 0 0 151px #4c4cff;
+    text-shadow: 0 0 7px #801ab2, 0 0 10px #801ab2, 0 0 21px #801ab2, 0 0 42px #4c4cff, 0 0 82px #4c4cff, 0 0 92px #4c4cff, 0 0 102px #4c4cff, 0 0 151px #4c4cff;
 }
 
-.burger_constructor__total_price {
+.burger-constructor__total-price {
     display: flex;
     align-items: center;
 }
 
-.burger_constructor__total_price svg {
+.burger-constructor__total-price svg {
     width: 36px;
     height: 36px;
 }
 
-.burger_constructor__body {
+.burger-constructor__body {
     margin-top: -24px;
     padding: 24px 0;
     display: flex;
@@ -32,10 +32,10 @@
 }
 
 .is-hover {
-    box-shadow: 0 0 0.2rem #801AB2, 0 0 0.2rem #801AB2, 0 0 2rem #4c4cff, 0 0 0.8rem #4c4cff, 0 0 2.8rem #4c4cff, inset 0 0 1.3rem #4c4cff;
+    box-shadow: 0 0 0.2rem #801ab2, 0 0 0.2rem #801ab2, 0 0 2rem #4c4cff, 0 0 0.8rem #4c4cff, 0 0 2.8rem #4c4cff, inset 0 0 1.3rem #4c4cff;
 }
 
-.burger_constructor__list {
+.burger-constructor__list {
     padding-left: 0;
     width: 100%;
     display: flex;
@@ -47,19 +47,19 @@
     scrollbar-width: auto;
 }
 
-.burger_constructor__list::-webkit-scrollbar {
+.burger-constructor__list::-webkit-scrollbar {
     width: 8px;
 }
 
-.burger_constructor__list::-webkit-scrollbar-track {
+.burger-constructor__list::-webkit-scrollbar-track {
     background: #2f2f37;
 }
 
-.burger_constructor__list::-webkit-scrollbar-thumb {
+.burger-constructor__list::-webkit-scrollbar-thumb {
     background-color: #8585ad;
 }
 
-.burger_constructor__item {
+.burger-constructor__item {
     width: 100%;
     display: flex;
     align-items: center;
@@ -67,8 +67,26 @@
     cursor: grabbing;
 }
 
-.burger_constructor__bottom {
+.burger-constructor__bottom {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: end;
+}
+
+.burger-constructor__hint {
+    width: fit-content;
+    margin-left: auto;
+    margin-right: 54px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease-in-out 0s;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.is-visible{
+    opacity: 1;
+    visibility: visible;
 }
