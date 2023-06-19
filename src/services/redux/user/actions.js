@@ -1,4 +1,5 @@
-import { getUserRequest, removeTokens, saveTokens, signInRequest, signOutRequest, updateUserRequest } from "../../../utils/burger-api";
+import { getUserRequest, removeTokens, saveTokens, signInRequest, signOutRequest, updateUserRequest, updateTokenRequest } from "../../../utils/burger-api";
+import { getCookie } from "../../../utils/cookie";
 export const name = 'USER';
 
 export const UserTypes = {
@@ -12,7 +13,9 @@ export const UserTypes = {
     UPDATE_FAILED: `${name}/UPDATE_FAILED`,
     UPDATE_SUCCESS: `${name}/UPDATE_SUCCESS`,
     GET_SUCCESS: `${name}/GET_SUCCESS`,
+    GET_REQUEST: `${name}/GET_REQUEST`,
     GET_FAILED: `${name}/GET_FAILED`,
+    AUTH_CHECKED: `${name}/AUTH_CHECKED`,
 }
 
 
@@ -56,7 +59,7 @@ export const updateUser = (infoName, infoValue) => {
         updateUserRequest(infoName, infoValue).then(res => {
             dispatch({ type: UserTypes.UPDATE_SUCCESS, payload: res });
         }).catch((error) => {
-            if (error.message === 'jwt expired') {
+            if (error === 'Ошибка 403') {
                 dispatch(updateToken(updateUser()))
             } else {
                 dispatch({ type: UserTypes.UPDATE_FAILED });
@@ -67,10 +70,12 @@ export const updateUser = (infoName, infoValue) => {
 
 export const getUser = () => {
     return dispatch => {
-        getUserRequest().then(res => {
+        dispatch({ type: UserTypes.GET_REQUEST });
+
+        return getUserRequest().then(res => {
             dispatch({ type: UserTypes.GET_SUCCESS, payload: res.user })
         }).catch((error) => {
-            if (error.message === 'jwt expired') {
+            if (error === 'Ошибка 403') {
                 dispatch(updateToken(getUser()))
             }
         })
@@ -79,10 +84,21 @@ export const getUser = () => {
 
 export const updateToken = (afterRefresh) => {
     return dispatch => {
-        updateUserRequest().then(res => {
+        updateTokenRequest().then(res => {
             saveTokens(res.accessToken, res.refreshToken);
+
             dispatch(afterRefresh);
         })
     }
 }
 
+
+export const checkUserAuth = () => dispatch => {
+    if (getCookie('accessToken')) {
+        dispatch(getUser()).finally(() => {
+            dispatch({ type: UserTypes.AUTH_CHECKED });
+        })
+    } else {
+        dispatch({ type: UserTypes.AUTH_CHECKED });
+    }
+}

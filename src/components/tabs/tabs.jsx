@@ -12,12 +12,11 @@ const Tabs = ({ titlesRefs, setCurrentTab, currentTab }) => {
     }
 
     return (
-        <>
-            <div className={`${styles.ingredients__tabs} mb-10`}>
-                <Tab onClick={onTabClick} active={currentTab === 'buns'} value='buns'>Булки</Tab>
-                <Tab onClick={onTabClick} active={currentTab === 'sauces'} value='sauces'>Соусы</Tab>
-                <Tab onClick={onTabClick} active={currentTab === 'mains'} value='mains'>Начинки</Tab>
-            </div></>
+        <div className={`${styles.ingredients__tabs} mb-10`}>
+            <Tab onClick={onTabClick} active={currentTab === 'buns'} value='buns'>Булки</Tab>
+            <Tab onClick={onTabClick} active={currentTab === 'sauces'} value='sauces'>Соусы</Tab>
+            <Tab onClick={onTabClick} active={currentTab === 'mains'} value='mains'>Начинки</Tab>
+        </div>
     )
 }
 

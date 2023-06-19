@@ -1,11 +1,10 @@
 import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
-import { getCookie } from '../../utils/cookie';
-import { getUser } from '../../services/redux/user/actions';
 import { useDispatch } from 'react-redux';
+import { getIngredients } from '../../services/redux/ingredients/actions';
+import { checkUserAuth } from '../../services/redux/user/actions';
 
 import ProtectedRouteElement from '../../hocs/protected-route-element';
-import ProtectedAuthRouteElement from '../../hocs/protected-auth-route-element';
 import Layout from '../layout/layout';
 import pages from '../../pages';
 import UserInfo from '../user-info/user-info';
@@ -17,9 +16,8 @@ const App = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        const accessToken = getCookie('accessToken');
-
-        if (accessToken) dispatch(getUser());
+        dispatch(getIngredients());
+        dispatch(checkUserAuth());
     }, [dispatch])
 
     const ModalSwitch = () => {
@@ -36,10 +34,10 @@ const App = () => {
             <Routes>
                 <Route path='/' element={<Layout />}>
                     <Route index element={<pages.main />} />
-                    <Route path='login' element={<ProtectedAuthRouteElement><pages.login /></ProtectedAuthRouteElement>} />
-                    <Route path='register' element={<ProtectedAuthRouteElement><pages.register /></ProtectedAuthRouteElement>} />
-                    <Route path='forgot-password' element={<ProtectedAuthRouteElement><pages.forgotPassword /></ProtectedAuthRouteElement>} />
-                    <Route path='reset-password' element={<ProtectedAuthRouteElement><pages.resetPassword /></ProtectedAuthRouteElement>} />
+                    <Route path='login' element={<ProtectedRouteElement onlyUnAuth><pages.login /></ProtectedRouteElement>} />
+                    <Route path='register' element={<ProtectedRouteElement onlyUnAuth><pages.register /></ProtectedRouteElement>} />
+                    <Route path='forgot-password' element={<ProtectedRouteElement onlyUnAuth><pages.forgotPassword /></ProtectedRouteElement>} />
+                    <Route path='reset-password' element={<ProtectedRouteElement onlyUnAuth><pages.resetPassword /></ProtectedRouteElement>} />
                     <Route path='profile' element={<ProtectedRouteElement><pages.profile /></ProtectedRouteElement>} >
                         <Route index element={<UserInfo />} />
                         <Route path='orders' element={<ProtectedRouteElement><UserOrders /></ProtectedRouteElement>} />
@@ -58,7 +56,7 @@ const App = () => {
                     ) : (
                         <Route path='ingredients/:ingredientId' element={<IngredientDetails />} />
                     )}
-                    
+
                 </Route>
             </Routes>
         );

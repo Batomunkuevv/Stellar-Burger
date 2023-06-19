@@ -1,6 +1,6 @@
 import styles from './form.module.css'
 import classNames from 'classnames';
-import { useState } from 'react';
+import useForm from '../../hooks/use-form';
 import { useNavigate } from 'react-router-dom';
 import { registerUserRequest } from '../../utils/burger-api';
 
@@ -9,28 +9,19 @@ import { Link } from "react-router-dom";
 
 const RegisterForm = () => {
     const navigate = useNavigate();
-    const [inputs, setInputs] = useState({
+
+    const { values, handeChange } = useForm({
         name: '',
         email: '',
-        password: ''
+        password: '',
     });
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        const { email, name, password } = inputs;
 
-        registerUserRequest(email, password, name).then(res => {
-            if(res.success) navigate('/login');
+        registerUserRequest(values.email, values.password, values.name).then(res => {
+            if (res.success) navigate('/login');
         });
-    }
-
-    const handeChange = (e) => {
-        const input = e.target;
-
-        setInputs({
-            ...inputs,
-            [input.name]: input.value
-        })
     }
 
     return (
@@ -41,7 +32,7 @@ const RegisterForm = () => {
             <div className={classNames(styles.form__body, 'mb-20')}>
                 <Input
                     onChange={handeChange}
-                    value={inputs.name}
+                    value={values.name}
                     type={'text'}
                     placeholder={'Имя'}
                     name={'name'}
@@ -51,14 +42,14 @@ const RegisterForm = () => {
                 />
                 <EmailInput
                     onChange={handeChange}
-                    value={inputs.email}
+                    value={values.email}
                     name={'email'}
                     isIcon={false}
                     extraClass={styles.form__item}
                 />
                 <PasswordInput
                     onChange={handeChange}
-                    value={inputs.password}
+                    value={values.password}
                     name={'password'}
                     extraClass={styles.form__item}
                 />

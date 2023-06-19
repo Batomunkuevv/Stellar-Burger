@@ -14,7 +14,6 @@ const checkSuccess = (res) => {
     if (res && res.success) {
         return res;
     }
-
     return Promise.reject(`Ответ не success: ${res}`);
 };
 
@@ -30,6 +29,7 @@ export const getIngredientRequest = (id) => request(`ingredients/${id}`);
 
 export const getOrderRequest = (constructorIngredients) => {
     const ingredientsIds = constructorIngredients?.map((ingredient) => ingredient._id);
+    const accessToken = getCookie('accessToken');
 
     const body = {
         ingredients: ingredientsIds,
@@ -39,6 +39,7 @@ export const getOrderRequest = (constructorIngredients) => {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
+            'Authorization': `Bearer ${accessToken}`
         },
         body: JSON.stringify(body),
     })
@@ -132,12 +133,10 @@ export const getUserRequest = () => {
 
 }
 
-export const updateUserRequest = (infoName, infoValue) => {
+export const updateUserRequest = (values) => {
     const accessToken = getCookie('accessToken');
 
-    const body = {
-        [infoName]: infoValue
-    }
+    const body = values
 
     return request('auth/user', {
         method: "PATCH",
@@ -155,7 +154,7 @@ export const updateTokenRequest = () => {
     }
 
     return request('auth/token', {
-        method: "GET",
+        method: "POST",
         headers: {
             "Content-Type": "application/json",
         },

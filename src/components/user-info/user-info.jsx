@@ -1,72 +1,98 @@
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector, } from "react-redux";
 import { updateUser } from "../../services/redux/user/actions";
+import styles from './user-info.module.css';
+import classNames from 'classnames';
+import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
-import { EmailInput, PasswordInput, Input } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useState } from "react";
+import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
+import useForm from '../../hooks/use-form';
 
 
 const UserInfo = () => {
     const dispatch = useDispatch();
-    const { user } = useSelector(store => store.auth);
+    const user = useSelector(store => store.user.data);
+    const [isVisibleButtons, setVisibleButtons] = useState(false);
 
-    const [inputs, setInputs] = useState({
+    let { values, handleChange, setValues } = useForm({
         'name': user.name,
         'email': user.email,
         'password': 'example'
     });
 
-    const handleChange = (e) => {
-        const input = e.target;
 
-        setInputs({
-            ...inputs,
-            [input.name]: input.value
-        });
+    const handleFormSubmit = (e) => {
+        e.preventDefault();
+
+        dispatch(updateUser(values))
+        setVisibleButtons(false);
     }
 
-    const handleBlur = (e) => {
-        const input = e.target;
+    handleChange = event => {
+        const { value, name } = event.target;
 
-        dispatch(updateUser(input.name, input.value));
-    }
+        if (user[name] !== value) {
+            setVisibleButtons(true);
+        } else {
+            setVisibleButtons(false);
+        }
 
-    const handleIconClick = (e) => {
+        setValues({ ...values, [name]: value });
+    };
 
+    const handleCancelChanging = () => {
+        setValues({
+            ...values,
+            'name': user.name,
+            'email': user.email,
+            'password': 'example'
+        })
     }
 
     return (
-        <div className="profile__info">
-            <Input
-                value={inputs.name}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                onIconClick={handleIconClick}
-                type={'text'}
-                placeholder={'Имя'}
-                icon={'EditIcon'}
-                name='name'
-                size={'default'}
-                extraClass="profile__info-item mb-6"
-            />
-            <EmailInput
-                value={inputs.email}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                name='email'
-                placeholder="Логин"
-                isIcon={true}
-                extraClass="profile__info-item mb-6"
-            />
-            <PasswordInput
-                name='password'
-                onChange={handleChange}
-                onBlur={handleBlur}
-                icon="EditIcon"
-                placeholder="Пароль"
-                value={inputs.password}
-            />
-        </div>
+        <form action='#' onSubmit={handleFormSubmit} className="user-info">
+            <div className='user-info__body mb-10'>
+                <Input
+                    value={values.name}
+                    onChange={handleChange}
+                    type={'text'}
+                    placeholder={'Имя'}
+                    icon={'EditIcon'}
+                    name='name'
+                    size={'default'}
+                    extraClass={classNames(styles['user-info__item'], 'mb-6')}
+                />
+                <Input
+                    value={values.email}
+                    onChange={handleChange}
+                    type={'email'}
+                    placeholder={'Логин'}
+                    icon={'EditIcon'}
+                    name='email'
+                    size={'default'}
+                    extraClass={classNames(styles['user-info__item'], 'mb-6',)}
+                />
+                <Input
+                    value={values.password}
+                    onChange={handleChange}
+                    type={'password'}
+                    placeholder={'Пароль'}
+                    icon={'EditIcon'}
+                    name='password'
+                    size={'default'}
+                    extraClass={styles['user-info__item']}
+                />
+            </div>
+            <div className={classNames(styles['user-info__buttons'], { [styles['is-visible']]: isVisibleButtons })}>
+                <Button htmlType="button" onClick={handleCancelChanging} type="secondary" size="medium">
+                    Отменить
+                </Button>
+                <Button htmlType="submit" type="primary" size="medium">
+                    Сохранить
+                </Button>
+            </div>
+        </form>
     )
 }
 

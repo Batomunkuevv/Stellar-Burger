@@ -1,33 +1,26 @@
 import styles from './form.module.css'
 import classNames from 'classnames';
 import { sendNewPasswordRequest } from '../../utils/burger-api';
+import { useNavigate } from 'react-router-dom';
 
 import { PasswordInput, Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link } from "react-router-dom";
-import { useState } from 'react';
+import useForm from '../../hooks/use-form';
 
 const ResetPasswordForm = () => {
-    const [inputs, setInputs] = useState({
+    const navigate = useNavigate();
+
+    const { values, handleChange } = useForm({
+        password: '',
         code: '',
-        password: ''
     });
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        const { code, password } = inputs;
 
-        sendNewPasswordRequest(password, code).then(res => {
-            console.log(res);
+        sendNewPasswordRequest(values.password, values.code).then(res => {
+            navigate('/', { replace: true })
         })
-    }
-
-    const handleChange = (e) => {
-        const input = e.target;
-
-        setInputs({
-            ...inputs,
-            [input.name]: input.value
-        });
     }
 
     return (
@@ -38,14 +31,14 @@ const ResetPasswordForm = () => {
             <div className={classNames(styles.form__body, 'mb-20')}>
                 <PasswordInput
                     onChange={handleChange}
-                    value={inputs.password}
+                    value={values.password}
                     placeholder='Введите новый пароль'
                     name={'password'}
                     extraClass={styles.form__item}
                 />
                 <Input
                     onChange={handleChange}
-                    value={inputs.code}
+                    value={values.code}
                     type={'text'}
                     placeholder={'Введите код из письма'}
                     name={'code'}

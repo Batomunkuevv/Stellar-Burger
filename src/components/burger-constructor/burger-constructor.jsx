@@ -1,5 +1,5 @@
 import { v4 as uuidv } from 'uuid';
-import { useState, useReducer, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useDrop } from 'react-dnd';
 import styles from './burger-constructor.module.css'
@@ -14,32 +14,18 @@ import OrderDetails from '../order-details/order-details';
 import ConstructorIngredientsList from '../constructor-ingredients-list/constructor-ingredients-list';
 import loadingBun from '../../images/loading-bun.svg';
 
-const totalPriceInitialState = { totalPrice: 0 };
-
-const reducer = (state, action) => {
-    state = totalPriceInitialState.totalPrice;
-
-    if (!action.ingredients && !action.bun) return { totalPrice: 0 };
-
-    if (action.ingredients) {
-        action.ingredients.forEach(ingredient => {
-            state += ingredient.price;
-        })
-    }
-
-    if (action.bun) {
-        state += action.bun.price * 2
-    }
-
-    return { totalPrice: state };
-}
-
 const BurgerConstructor = () => {
     const dispatch = useDispatch();
 
     const { ingredients, bun } = useSelector(store => store.burgerConstructor);
+    const user = useSelector(store => store.user.data);
 
-    const [totalPriceState, dispatcherTotalPrice] = useReducer(reducer, totalPriceInitialState, undefined);
+    const totalPrice = useMemo(() => {
+        return (bun ? bun.price * 2 : 0) + ingredients.reduce((acc, ingredient) => {
+            return acc += ingredient.price;
+        }, 0)
+    }, [ingredients, bun])
+
     const [isOrderModalOpen, toggleModal] = useState(false);
 
     const [{ isHover }, constructorTarget] = useDrop({
@@ -72,7 +58,7 @@ const BurgerConstructor = () => {
         toggleModal(true);
         document.body.classList.add('lock');
 
-        dispatch(getOrder([...ingredients, bun]));
+        dispatch(getOrder([bun, ...ingredients, bun]));
     }
 
     const handleCloseModal = () => {
@@ -80,10 +66,6 @@ const BurgerConstructor = () => {
         document.body.classList.remove('lock');
         dispatch({ type: OrderDetailsTypes.CLEAR })
     }
-
-    useEffect(() => {
-        dispatcherTotalPrice({ ingredients: ingredients, bun: bun });
-    }, [ingredients, bun])
 
     return (
         <div className={`${styles['burger-constructor']}`}>
@@ -136,10 +118,10 @@ const BurgerConstructor = () => {
             </div>
             <div className={`${styles.burger_constructor__bottom} mr-4`}>
                 <div className={`${styles.burger_constructor__total_price} mr-10`}>
-                    <p className="text text_type_digits-medium mr-2">{totalPriceState.totalPrice}</p>
+                    <p className="text text_type_digits-medium mr-2">{totalPrice}</p>
                     <CurrencyIcon type="primary" />
                 </div>
-                <Button disabled={!bun ? true : false} onClick={handleOpenModal} htmlType="button" type="primary" size="large">
+                <Button disabled={!user || !bun ? true : false} onClick={handleOpenModal} htmlType="button" type="primary" size="large">
                     Оформить заказ
                 </Button>
             </div>

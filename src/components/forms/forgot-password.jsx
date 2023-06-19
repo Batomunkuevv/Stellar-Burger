@@ -1,30 +1,31 @@
 import styles from './form.module.css'
 import classNames from 'classnames';
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { sendPasswordResetRequest } from '../../utils/burger-api';
 
 import { EmailInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link } from "react-router-dom";
+import useForm from '../../hooks/use-form';
 
 const ForgotPasswordForm = () => {
     const navigate = useNavigate();
-    const [emailValue, setEmailValue] = useState('');
+
+    const { values, handleChange } = useForm({
+        email: ''
+    });
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
 
-        sendPasswordResetRequest(emailValue).then(res => {
-            if(res.success){
-                navigate('/reset-password', {state: {
-                    email: emailValue
-                }});
+        sendPasswordResetRequest(values.email).then(res => {
+            if (res.success) {
+                navigate('/reset-password', {
+                    state: {
+                        email: values.email
+                    }
+                });
             }
         });
-    }
-
-    const handleChange = (e) => {
-        setEmailValue(e.target.value);
     }
 
     return (
@@ -36,7 +37,7 @@ const ForgotPasswordForm = () => {
                 <EmailInput
                     onChange={handleChange}
                     name='email'
-                    value={emailValue}
+                    value={values.email}
                     isIcon={false}
                     placeholder='Укажите e-mail'
                     extraClass={styles.form__item}

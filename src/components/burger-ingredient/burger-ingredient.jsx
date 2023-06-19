@@ -4,13 +4,10 @@ import ingredientPropTypes from '../../utils/ingredientPropTypes';
 
 import { Link, useLocation } from 'react-router-dom';
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
-import { DndTypes } from '../../services/redux/dnd/actions';
-import { useDispatch } from 'react-redux';
 import { useDrag } from 'react-dnd';
 
 
 const BurgerIngredient = ({ ingredientData }) => {
-    const dispatch = useDispatch();
     const location = useLocation();
 
     const { name, image, price, counter, _id } = ingredientData;
@@ -25,12 +22,8 @@ const BurgerIngredient = ({ ingredientData }) => {
         )
     })
 
-    const onDragHandler = () => {
-        dispatch({ type: DndTypes.SET_DRAGGED_INGREDIENT, payload: ingredientData })
-    }
-
     return (
-        <article style={{ opacity }} onDrag={onDragHandler} draggable ref={ingredientRef} >
+        <article style={{ opacity }}  draggable ref={ingredientRef} >
             <Link className={`${styles.ingredient}`} to={`ingredients/${_id}`} state={{from: location}}>
                 <Counter count={counter} size="default" />
                 <div className={`${styles.ingredient__img} mb-2`}>

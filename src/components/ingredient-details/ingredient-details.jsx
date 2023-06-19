@@ -1,24 +1,15 @@
 import styles from './ingredient-details.module.css';
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getIngredients } from '../../services/redux/ingredients/actions';
 
 import Preloader from '../preloader/preloader';
 
 const IngredientDetails = () => {
-    const dispatch = useDispatch();
-
     const { ingredientId } = useParams();
 
     const { ingredients, ingredientsRequest, ingredientsFailed } = useSelector(store => store.ingredients);
 
     const ingredient = ingredients.find(ingredient => ingredient._id === ingredientId);
-
-    useEffect(() => {
-        dispatch(getIngredients());
-    }, [dispatch])
-
 
     return (
         <>

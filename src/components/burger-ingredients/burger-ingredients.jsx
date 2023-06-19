@@ -1,21 +1,23 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import styles from "./burger-ingredients.module.css";
-import { useSelector, useDispatch } from 'react-redux';
-import { getIngredients } from '../../services/redux/ingredients/actions';
+import { useSelector } from 'react-redux';
 
 import Preloader from '../preloader/preloader';
 import Tabs from '../tabs/tabs';
 import IngredientsCategory from '../ingredients-category/ingredients-category';
 
 const BurgerIngredients = () => {
-    const dispatch = useDispatch();
-
     const [currentTab, setCurrentTab] = useState('buns');
     const { ingredients, ingredientsRequest, ingredientsFailed } = useSelector(store => store.ingredients);
-    const buns = useMemo(() => ingredients.filter((item) => item.type === 'bun'), [ingredients]);
-    const mains = useMemo(() => ingredients.filter((item) => item.type === 'main'), [ingredients]);
-    const sauces = useMemo(() => ingredients.filter((item) => item.type === 'sauce'), [ingredients]);
 
+    const {buns, mains, sauces} = useMemo(() => {
+        return {
+            buns: ingredients.filter((item) => item.type === 'bun'),
+            mains: ingredients.filter((item) => item.type === 'main'),
+            sauces: ingredients.filter((item) => item.type === 'sauce')
+        }
+    }, [ingredients])
+    
     const titlesRefs = [
         { name: 'buns', title: useRef(null) },
         { name: 'sauces', title: useRef(null) },
@@ -50,10 +52,6 @@ const BurgerIngredients = () => {
             });
         }
     }
-
-    useEffect(() => {
-        dispatch(getIngredients());
-    }, [dispatch])
 
     useEffect(() => {
         observeBurgerIngredients();

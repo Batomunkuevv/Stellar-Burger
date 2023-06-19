@@ -7,15 +7,30 @@ const initialStore = {
     signOutFailed: false,
     updateFailed: false,
     updateRequest: false,
-    user: null
+    getRequest: false,
+    data: null,
+    isAuthChecked: false
 };
 
 export const userReducer = (store = initialStore, action) => {
     switch (action.type) {
+        case UserTypes.AUTH_CHECKED:{
+            return{
+                ...store,
+                isAuthChecked: true
+            }
+        }
+        case UserTypes.GET_REQUEST:{
+            return{
+                ...store,
+                getRequest: true,
+            }
+        }
         case UserTypes.GET_SUCCESS:{
             return{
                 ...store,
-                user: action.payload
+                getRequest: false,
+                data: action.payload
             }
         }
         case UserTypes.SIGN_IN_REQUEST: {
@@ -37,7 +52,7 @@ export const userReducer = (store = initialStore, action) => {
                 ...store,
                 signInRequest: false,
                 signInFailed: false,
-                user: action.payload
+                data: action.payload
             }
         }
         case UserTypes.SIGN_OUT_REQUEST: {
@@ -59,7 +74,7 @@ export const userReducer = (store = initialStore, action) => {
                 ...store,
                 signOutFailed: false,
                 signOutRequest: false,
-                user: initialStore.user
+                data: initialStore.user
             }
         }
         case UserTypes.UPDATE_REQUEST:{
@@ -81,7 +96,7 @@ export const userReducer = (store = initialStore, action) => {
                 ...store,
                 updateFailed: false,
                 updateRequest: false,
-                user: action.payload.user
+                data: action.payload.user
             }
         }
         default: {

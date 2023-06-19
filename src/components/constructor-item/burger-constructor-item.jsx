@@ -64,22 +64,21 @@ const ConstructorItem = ({ _id, name, type, price, image, index, handlerId, move
     const preventDefault = (e) => e.preventDefault();
 
     return (
-        <>
-            <li draggable
-                ref={constructorItemRef}
-                style={{ opacity }}
-                onDrop={preventDefault} data-handler-id={handlerId} className={`${styles.burger_constructor__item}`}>
-                <div className={`${styles.burger_constructor__drag}`}>
-                    <DragIcon />
-                </div>
-                <ConstructorElement
-                    text={name}
-                    price={price}
-                    thumbnail={image}
-                    handleClose={removeIngredient}
-                />
-            </li>
-        </>
+        <li draggable
+            ref={constructorItemRef}
+            style={{ opacity }}
+            onDrop={preventDefault} data-handler-id={handlerId} className={`${styles.burger_constructor__item}`}>
+            <div className={`${styles.burger_constructor__drag}`}>
+                <DragIcon />
+            </div>
+            <ConstructorElement
+                text={name}
+                price={price}
+                thumbnail={image}
+                handleClose={removeIngredient}
+            />
+        </li>
+
     )
 }
 

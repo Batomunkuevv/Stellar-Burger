@@ -1,36 +1,25 @@
 import styles from './form.module.css'
 import classNames from 'classnames';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { signIn } from '../../services/redux/user/actions';
 
 import { EmailInput, PasswordInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link } from "react-router-dom";
+import useForm from '../../hooks/use-form';
 
-const LoginForm = ({ fromPage }) => {
-    const navigate = useNavigate();
+const LoginForm = () => {
+
     const dispatch = useDispatch();
 
-    const [inputs, setInputs] = useState({
+    const { values, handleChange } = useForm({
         email: '',
         password: '',
     });
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        const { email, password } = inputs;
 
-        dispatch(signIn(email, password, () => navigate(fromPage, { replace: true })));
-    }
-
-    const handleChange = (e) => {
-        const input = e.target;
-
-        setInputs({
-            ...inputs,
-            [input.name]: input.value
-        });
+        dispatch(signIn(values.email, values.password));
     }
 
     return (
@@ -41,16 +30,16 @@ const LoginForm = ({ fromPage }) => {
             <div className={classNames(styles.form__body, 'mb-20')}>
                 <EmailInput
                     onChange={handleChange}
-                    value={inputs.email}
-                    name={'email'}
+                    value={values.email}
+                    name='email'
                     isIcon={false}
                     extraClass={styles.form__item}
                 />
 
                 <PasswordInput
                     onChange={handleChange}
-                    value={inputs.password}
-                    name={'password'}
+                    value={values.password}
+                    name='password'
                     extraClass={styles.form__item}
                 />
                 <Button htmlType="submit" type="primary" size="medium">
