@@ -19,7 +19,7 @@ const UserInfo = () => {
     let { values, handleChange, setValues } = useForm({
         'name': user.name,
         'email': user.email,
-        'password': 'example'
+        'password': ''
     });
 
 
