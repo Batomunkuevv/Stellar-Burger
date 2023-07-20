@@ -3,16 +3,7 @@ import { getCookie, setCookie } from "./cookie";
 
 export const NORMA_API = "https://norma.nomoreparties.space/api/";
 
-type TFetchOptions = {
-    method?: string;
-    headers?: {
-        [header: string]: string;
-    };
-    body?: string;
-};
-
-const checkResponse = (res: any) => {
-    console.log(res);
+const checkResponse = (res: Response) => {
     if (res.ok) {
         return res.json();
     }
@@ -21,13 +12,13 @@ const checkResponse = (res: any) => {
 };
 
 const checkSuccess = (res: any) => {
-    if (res && res.success) {
+    if (res && res.ok) {
         return res;
     }
     return Promise.reject(`Ответ не success: ${res}`);
 };
 
-const request = (endpoint: string, options?: TFetchOptions) => {
+const request = (endpoint: string, options?: RequestInit) => {
     return fetch(`${NORMA_API}${endpoint}`, options).then(checkResponse).then(checkSuccess);
 };
 

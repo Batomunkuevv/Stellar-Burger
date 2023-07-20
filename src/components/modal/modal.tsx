@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom";
-import { FC, useEffect } from "react";
+import { FC, useEffect, PropsWithChildren } from "react";
 
 import styles from './modal.module.css';
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -10,7 +10,7 @@ import { TModal } from "../../types";
 
 const modalRoot = document.getElementById("modals") as HTMLDivElement;
 
-const Modal: FC<TModal> = ({ onClose, modalTitle, children }) => {
+const Modal: FC<PropsWithChildren<TModal>> = ({ onClose, modalTitle, children }) => {
     useEffect(() => {
         window.addEventListener('keydown', closeModalOnEsc);
 
