@@ -1,8 +1,8 @@
 import { FC, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { getIngredients } from '../../services/redux/ingredients/actions';
-import { checkUserAuth } from '../../services/redux/user/actions';
+import { useDispatch } from '../../hooks/use-dispatch';
+import { getIngredients } from '../../services/ingredients/actions';
+import { checkUserAuth } from '../../services/user/actions';
 
 import ProtectedRouteElement from '../../hocs/protected-route-element';
 import Layout from '../layout/layout';
@@ -16,8 +16,8 @@ const App: FC = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getIngredients() as any);
-        dispatch(checkUserAuth() as any);
+        dispatch(getIngredients());
+        dispatch(checkUserAuth());
     }, [dispatch])
 
     const ModalSwitch = () => {

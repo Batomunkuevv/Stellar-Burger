@@ -4,13 +4,13 @@ import { useSelector } from "react-redux";
 
 import CheckIcon from "../../images/check.svg";
 import Preloader from "../preloader/preloader";
-import { getOrder, getOrderFailed, getOrderRequest } from "../../services/redux/order-details/selectors";
+import { getOrder, getOrderFailed, getOrderRequest } from "../../services/order-details/selectors";
 
 // Types
 import { TOrder } from "../../types";
 
 const OrderDetails: FC = () => {
-    const order: TOrder = useSelector(getOrder);
+    const order: TOrder | null = useSelector(getOrder);
     const orderRequest: boolean = useSelector(getOrderRequest);
     const orderFailed: boolean = useSelector(getOrderFailed);
 
@@ -20,7 +20,7 @@ const OrderDetails: FC = () => {
                 <Preloader />
             ) : orderFailed ? (
                 "Произошла ошибка при отправке заказа"
-            ) : (
+            ) : order && (
                 <div className={`${styles["order-details"]} pt-4 pb-20`}>
                     <div className="order-details__number text text_type_digits-large mb-8">{order.number}</div>
                     <div className="order-details__caption text text_type_main-medium mb-15">идентификатор заказа</div>

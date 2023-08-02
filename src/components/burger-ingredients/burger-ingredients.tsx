@@ -8,7 +8,7 @@ import { TIngredient, TTitleRef } from "../../types";
 import Preloader from "../preloader/preloader";
 import Tabs from "../tabs/tabs";
 import IngredientsCategory from "../ingredients-category/ingredients-category";
-import { getIngredients, getIngredientsRequest, getIngredientsFailed } from "../../services/redux/ingredients/selectors";
+import { getIngredients, getIngredientsRequest, getIngredientsFailed } from "../../services/ingredients/selectors";
 
 const BurgerIngredients: FC = () => {
     const [currentTab, setCurrentTab] = useState("buns");

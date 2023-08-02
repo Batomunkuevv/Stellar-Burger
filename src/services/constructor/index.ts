@@ -1,4 +1,4 @@
 import { constructorReducer } from "./reducer";
-import { name } from './actions';
+import { name } from './constants';
 
 export { constructorReducer, name };

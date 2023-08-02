@@ -2,7 +2,7 @@ import classNames from "classnames";
 import styles from "./profile.module.css";
 import { FC } from 'react';
 
-import { signOut } from "../../services/redux/user/actions";
+import { signOut } from "../../services/user/actions";
 import { useDispatch } from "react-redux";
 
 import { NavLink, useNavigate, Outlet } from "react-router-dom";

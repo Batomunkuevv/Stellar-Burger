@@ -2,14 +2,14 @@ import { FC } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Preloader from "../components/preloader/preloader";
-import { getIsAuthChecked, getUser } from "../services/redux/user/selectors";
+import { getIsAuthChecked, getUser } from "../services/user/selectors";
 
 // Types
 import { TUser, TProtectedRoute } from "../types";
 
 const ProtectedRouteElement: FC<TProtectedRoute> = ({ onlyUnAuth = false, children}) => {
     const location = useLocation();
-    const user: TUser = useSelector(getUser);
+    const user: TUser | null = useSelector(getUser);
     const isAuthChecked: boolean = useSelector(getIsAuthChecked);
 
     if (!isAuthChecked) return <Preloader />

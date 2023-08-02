@@ -1,7 +1,7 @@
 import { useRef, FC } from "react";
 import { useDrop, useDrag } from "react-dnd";
 import styles from "../burger-constructor/burger-constructor.module.css";
-import { ConstructorTypes } from "../../services/redux/constructor/actions";
+import { ConstructorTypes } from "../../services/constructor/constants";
 import { useDispatch } from "react-redux";
 
 // Type

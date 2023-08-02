@@ -1,8 +1,8 @@
 import { TIngredient } from "./burger-ingredients"
 
 export type TConstructorItems = {
-    constructorIngredients: Array<TIngredient>,
-    bun: TIngredient
+    constructorIngredients: Array<TIngredient>;
+    bun: TIngredient | null;
 }
 
 export type TConstructorIngredient = TIngredient & {

@@ -4,11 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useDrop } from 'react-dnd';
 import styles from './burger-constructor.module.css'
-import { getOrder } from '../../services/redux/order-details/actions';
-import { ConstructorTypes } from '../../services/redux/constructor/actions';
-import { OrderDetailsTypes } from '../../services/redux/order-details/actions';
-import { getUser } from '../../services/redux/user/selectors';
-import { getConstructorItems } from '../../services/redux/constructor/selectors';
+import { getOrder } from '../../services/order-details/actions';
+import { ConstructorTypes } from '../../services/constructor/constants';
+import { OrderDetailsTypes } from '../../services/order-details/constants';
+import { getUser } from '../../services/user/selectors';
+import { getConstructorItems } from '../../services/constructor/selectors';
 
 // Types
 import { TIngredient } from '../../types';
@@ -27,7 +27,7 @@ const BurgerConstructor: FC = () => {
     const dispatch = useDispatch();
 
     const { constructorIngredients, bun }: TConstructorItems = useSelector(getConstructorItems);
-    const user: TUser = useSelector(getUser);
+    const user: TUser | null = useSelector(getUser);
     
     const totalPrice = useMemo(() => {
         return (bun ? bun.price * 2 : 0) + constructorIngredients.reduce((acc: number, ingredient: TIngredient) => {

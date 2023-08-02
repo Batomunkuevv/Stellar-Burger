@@ -1,6 +1,20 @@
-import { UserTypes } from './actions';
+import { TUser } from './../../types/user';
+import { UserTypes } from './constants';
+import { TUserActions } from './actions';
 
-const initialStore = {
+type TUserStore = {
+    signInFailed: boolean,
+    signInRequest: boolean,
+    signOutRequest: boolean,
+    signOutFailed: boolean,
+    updateFailed: boolean,
+    updateRequest: boolean,
+    getRequest: boolean,
+    data: TUser| null,
+    isAuthChecked: boolean    
+}
+
+const initialStore:TUserStore = {
     signInFailed: false,
     signInRequest: false,
     signOutRequest: false,
@@ -12,7 +26,7 @@ const initialStore = {
     isAuthChecked: false
 };
 
-export const userReducer = (store = initialStore, action) => {
+export const userReducer = (store = initialStore, action: TUserActions): TUserStore => {
     switch (action.type) {
         case UserTypes.AUTH_CHECKED:{
             return{
@@ -74,7 +88,7 @@ export const userReducer = (store = initialStore, action) => {
                 ...store,
                 signOutFailed: false,
                 signOutRequest: false,
-                data: initialStore.user
+                data: initialStore.data
             }
         }
         case UserTypes.UPDATE_REQUEST:{

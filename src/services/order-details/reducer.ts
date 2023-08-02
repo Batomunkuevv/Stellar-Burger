@@ -1,12 +1,20 @@
-import { OrderDetailsTypes } from "./actions";
+import { TOrder } from "../../types";
+import { TOrderActions } from "./actions";
+import { OrderDetailsTypes } from "./constants";
 
-const initialStore = {
+type TOrderStore = {
+    order: TOrder | null;
+    orderRequest: boolean;
+    orderFailed: boolean;
+}
+
+const initialStore: TOrderStore = {
     order: null,
     orderRequest: false,
     orderFailed: false,
 };
 
-export const orderDetailsReducer = (store = initialStore, action) => {
+export const orderDetailsReducer = (store = initialStore, action: TOrderActions): TOrderStore => {
     switch (action.type) {
         case OrderDetailsTypes.GET_SUCCESS: {
             return {

@@ -1,11 +1,18 @@
-import { ConstructorTypes } from './actions';
+import { ConstructorTypes } from './constants';
+import { TConstructorActions } from './actions';
+import { TConstructorIngredient } from '../../types';
 
-const initialStore = {
+type TConstructorStore = {
+    constructorIngredients: TConstructorIngredient[];
+    bun: TConstructorIngredient | null;
+}
+
+const initialStore: TConstructorStore = {
     constructorIngredients: [],
     bun: null
 };
 
-export const constructorReducer = (store = initialStore, action) => {
+export const constructorReducer = (store = initialStore, action: TConstructorActions): TConstructorStore => {
     switch (action.type) {
         case ConstructorTypes.ADD_INGREDIENT: {
             return {
@@ -14,7 +21,6 @@ export const constructorReducer = (store = initialStore, action) => {
             }
         }
         case ConstructorTypes.REMOVE_INGREDIENT: {
-
             return {
                 ...store,
                 constructorIngredients: [...store.constructorIngredients.filter(ingredient => ingredient.handlerId !== action.payload)]

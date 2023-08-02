@@ -1,17 +1,24 @@
-import { IngredientsTypes } from "./actions";
+import { TIngredient } from "../../types";
+import { TIngredientsActions } from "./actions";
+import { IngredientsTypes } from "./constants";
 
-const initialStore = {
+type TIngredientsStore = {
+    data: TIngredient[];
+    ingredientsFailed: boolean;
+    ingredientsRequest: boolean;
+}
+
+const initialStore: TIngredientsStore = {
     data: [],
     ingredientsFailed: false,
     ingredientsRequest: false,
 };
 
-export const ingredientsReducer = (store = initialStore, action) => {
+export const ingredientsReducer = (store = initialStore, action: TIngredientsActions): TIngredientsStore => {
     switch (action.type) {
         case IngredientsTypes.GET_SUCCESS: {
-
             return {
-                data: action.payload.ingredients,
+                data: action.payload,
                 ingredientsRequest: false,
                 ingredientsFailed: false,
             };

@@ -1,7 +1,7 @@
 import styles from './ingredient-details.module.css';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getIngredients, getIngredientsFailed, getIngredientsRequest } from '../../services/redux/ingredients/selectors';
+import { getIngredients, getIngredientsFailed, getIngredientsRequest } from '../../services/ingredients/selectors';
 
 import Preloader from '../preloader/preloader';
 

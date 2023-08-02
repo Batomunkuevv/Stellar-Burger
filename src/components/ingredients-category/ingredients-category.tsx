@@ -2,7 +2,7 @@ import React from "react";
 import styles from "../burger-ingredients/burger-ingredients.module.css";
 import BurgerIngredient from "../burger-ingredient/burger-ingredient";
 import { useSelector } from "react-redux";
-import { getIngredientsCounters } from "../../services/redux/constructor/selectors";
+import { getIngredientsCounters } from "../../services/constructor/selectors";
 
 // Types
 import { TIngredientsCategory } from "../../types";
