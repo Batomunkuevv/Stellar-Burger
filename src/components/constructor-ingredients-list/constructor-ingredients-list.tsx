@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import styles from "../burger-constructor/burger-constructor.module.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../../hooks/redux-hooks";
 import { ConstructorTypes } from "../../services/constructor/constants";
 import { getConstructorIngredients } from "../../services/constructor/selectors";
 

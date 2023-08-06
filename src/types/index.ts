@@ -6,3 +6,4 @@ export * from './preloader';
 export * from './modal';
 export * from './tabs';
 export * from './protected-route';
+export * from './new-order';

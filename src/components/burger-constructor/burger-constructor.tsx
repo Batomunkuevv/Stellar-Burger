@@ -1,7 +1,7 @@
 import { v4 as uuidv } from 'uuid';
 import { useState, useMemo, FC } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from '../../hooks/redux-hooks';
 import { useDrop } from 'react-dnd';
 import styles from './burger-constructor.module.css'
 import { getOrder } from '../../services/order-details/actions';
@@ -17,7 +17,7 @@ import { TUser } from '../../types';
 
 import { Button, CurrencyIcon, InfoIcon, ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import Modal from '../modal/modal';
-import OrderDetails from '../order-details/order-details';
+import OrderSuccess from '../order-success/order-success';
 import ConstructorIngredientsList from '../constructor-ingredients-list/constructor-ingredients-list';
 import loadingBun from '../../images/loading-bun.svg';
 import classNames from 'classnames';
@@ -141,7 +141,7 @@ const BurgerConstructor: FC = () => {
             )}
             {isOrderModalOpen &&
                 <Modal onClose={handleCloseModal}>
-                    <OrderDetails />
+                    <OrderSuccess />
                 </Modal>
             }
         </div>

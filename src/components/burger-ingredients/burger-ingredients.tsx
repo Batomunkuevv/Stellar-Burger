@@ -1,6 +1,6 @@
 import { FC, useEffect, useMemo, useRef, useState } from "react";
 import styles from "./burger-ingredients.module.css";
-import { useSelector } from "react-redux";
+import { useSelector } from "../../hooks/redux-hooks";
 
 // Types
 import { TIngredient, TTitleRef } from "../../types";

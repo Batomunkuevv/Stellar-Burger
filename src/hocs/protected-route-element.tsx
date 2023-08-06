@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Navigate, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector } from "../hooks/redux-hooks";
 import Preloader from "../components/preloader/preloader";
 import { getIsAuthChecked, getUser } from "../services/user/selectors";
 

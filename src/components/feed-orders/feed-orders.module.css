@@ -1,0 +1,26 @@
+.feed-orders{
+    max-height: 870px;
+    width: 600px;
+    margin: 0;
+    padding: 0 8px 0 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow: auto;
+    scrollbar-color: #8585ad #2f2f37;
+    scrollbar-width: auto;
+    box-sizing: border-box;
+}
+
+.feed-orders::-webkit-scrollbar {
+    width: 8px;
+}
+
+.feed-orders::-webkit-scrollbar-track {
+    background: #2f2f37;
+}
+
+.feed-orders::-webkit-scrollbar-thumb {
+    background-color: #8585ad;
+}

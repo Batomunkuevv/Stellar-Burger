@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "../burger-ingredients/burger-ingredients.module.css";
 import BurgerIngredient from "../burger-ingredient/burger-ingredient";
-import { useSelector } from "react-redux";
+import { useSelector } from "../../hooks/redux-hooks";
 import { getIngredientsCounters } from "../../services/constructor/selectors";
 
 // Types
@@ -19,7 +19,7 @@ const IngredientCategory = React.forwardRef<HTMLHeadingElement, TIngredientsCate
             </h3>
             <div className={`${styles.ingredients__block} pl-4 ${isLastClass}`}>
                 {ingredients.map((ingredient) => {
-                    return <BurgerIngredient key={ingredient._id} ingredientData={ingredient} count={ingredietsCounters[ingredient._id]} />;
+                    return <BurgerIngredient key={ingredient._id} {...ingredient} count={ingredietsCounters[ingredient._id]} />;
                 })}
             </div>
         </div>

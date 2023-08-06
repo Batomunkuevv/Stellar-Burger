@@ -16,27 +16,22 @@ export interface IGetIngredientsRequestAction {
     type: typeof IngredientsTypes.GET_REQUEST;
 }
 
-export const getIngredients: AppThunk = () => {
-    return (dispatch: AppDispatch) => {
-        dispatch({
-            type: IngredientsTypes.GET_REQUEST,
-        });
-        getIngredientsRequest()
-            .then((res) => {
-                dispatch({
-                    type: IngredientsTypes.GET_SUCCESS,
-                    payload: res.data,
-                });
-            })
-            .catch(() => {
-                dispatch({
-                    type: IngredientsTypes.GET_FAILED,
-                });
+export const getIngredients: AppThunk = () => (dispatch: AppDispatch) => {
+    dispatch({
+        type: IngredientsTypes.GET_REQUEST,
+    });
+    getIngredientsRequest()
+        .then((res) => {
+            dispatch({
+                type: IngredientsTypes.GET_SUCCESS,
+                payload: res.data,
             });
-    };
+        })
+        .catch(() => {
+            dispatch({
+                type: IngredientsTypes.GET_FAILED,
+            });
+        });
 };
 
-export type TIngredientsActions = 
-    IGetIngredientsFailedAction |
-    IGetIngredientsRequestAction |
-    IGetIngredientsSuccessAction
+export type TIngredientsActions = IGetIngredientsFailedAction | IGetIngredientsRequestAction | IGetIngredientsSuccessAction;

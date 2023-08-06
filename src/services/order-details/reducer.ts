@@ -1,9 +1,9 @@
-import { TOrder } from "../../types";
+import { TNewOrder } from "../../types/new-order";
 import { TOrderActions } from "./actions";
 import { OrderDetailsTypes } from "./constants";
 
 type TOrderStore = {
-    order: TOrder | null;
+    order: TNewOrder | null;
     orderRequest: boolean;
     orderFailed: boolean;
 }

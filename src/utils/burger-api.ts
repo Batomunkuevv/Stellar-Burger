@@ -44,6 +44,8 @@ export const getOrderRequest = (constructorIngredients: Array<TIngredient>) => {
     });
 };
 
+export const getOrderDetailsRequest = (number: number) => request(`orders/${number}`);
+
 export const sendPasswordResetRequest = (email: string) => {
     const body = {
         email: email,

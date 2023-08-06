@@ -1,0 +1,43 @@
+.order-info-item{
+    display: flex;
+    align-items: center;
+}
+
+.order-info-item__image {
+    flex: none;
+    position: relative;
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    overflow: hidden;
+    background: linear-gradient(223deg, #801ab2 0%, #4c4cff 100%);
+}
+
+.order-info-item__image::before {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
+    border-radius: 50%;
+    background: #131316;
+}
+
+.order-info-item__image img{
+    z-index: 2;
+}
+
+.order-info-item__name{
+    flex: 1 1 auto;
+}
+
+.order-info-item__price{
+    flex: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}

@@ -1,4 +1,4 @@
-import { TIngredient, TOrder } from "../../types";
+import { TIngredient, TNewOrder } from "../../types";
 import { getOrderRequest } from "../../utils/burger-api";
 import { OrderDetailsTypes } from "./constants";
 import { ConstructorTypes } from "../constructor/constants";
@@ -6,7 +6,7 @@ import { AppDispatch, AppThunk } from "../types";
 
 export interface IGetOrderSuccessAction {
     type: typeof OrderDetailsTypes.GET_SUCCESS;
-    payload: TOrder;
+    payload: TNewOrder;
 }
 
 export interface IGetOrderFailedAction {
@@ -21,23 +21,17 @@ export interface IOrderClearAction {
     type: typeof OrderDetailsTypes.CLEAR;
 }
 
-export const getOrder: AppThunk = (ingredients: TIngredient[]) => {
-    return (dispatch: AppDispatch) => {
-        dispatch({ type: OrderDetailsTypes.GET_REQUEST });
+export const getOrder: AppThunk = (ingredients: TIngredient[]) => (dispatch: AppDispatch) => {
+    dispatch({ type: OrderDetailsTypes.GET_REQUEST });
 
-        getOrderRequest(ingredients)
-            .then((res) => {
-                dispatch({ type: OrderDetailsTypes.GET_SUCCESS, payload: res.order });
-                dispatch({ type: ConstructorTypes.CLEAR});
-            })
-            .catch((error) => {
-                dispatch({ type: OrderDetailsTypes.GET_FAILED });
-            });
-    };
+    getOrderRequest(ingredients)
+        .then((res) => {
+            dispatch({ type: OrderDetailsTypes.GET_SUCCESS, payload: res.order });
+            dispatch({ type: ConstructorTypes.CLEAR });
+        })
+        .catch((error) => {
+            dispatch({ type: OrderDetailsTypes.GET_FAILED });
+        });
 };
 
-export type TOrderActions = 
-    IGetOrderSuccessAction |
-    IGetOrderFailedAction |
-    IGetOrderRequestAction |
-    IOrderClearAction
+export type TOrderActions = IGetOrderSuccessAction | IGetOrderFailedAction | IGetOrderRequestAction | IOrderClearAction;

@@ -22,8 +22,7 @@ export type TIngredient = {
     _id: string;
 }
 
-export type TIngredientWithCount = {
-    ingredientData: TIngredient;
+export type TIngredientWithCount = TIngredient & {
     count: number;
 }
 

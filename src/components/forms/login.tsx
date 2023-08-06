@@ -1,16 +1,15 @@
 import styles from "./form.module.css";
 import classNames from "classnames";
-import { useDispatch } from "react-redux";
+import { useDispatch } from "../../hooks/redux-hooks";
 import { signIn } from "../../services/user/actions";
 
 import { EmailInput, PasswordInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link } from "react-router-dom";
 import useForm from "../../hooks/use-form";
 import { FC, FormEvent } from "react";
-import { AppDispatch } from "../../services/types";
 
 const LoginForm: FC = () => {
-    const dispatch: AppDispatch = useDispatch();
+    const dispatch = useDispatch();
 
     const { values, handleChange } = useForm({
         email: "",
@@ -20,7 +19,7 @@ const LoginForm: FC = () => {
     const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        dispatch(signIn(values.email, values.password) as any);
+        dispatch(signIn(values.email, values.password));
     };
 
     return (
