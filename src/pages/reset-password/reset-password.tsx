@@ -1,6 +1,6 @@
 import { useEffect, FC } from 'react';
 import { useLocation, useNavigate } from "react-router-dom";
-import ResetPasswordForm from "../components/forms/reset-password";
+import ResetPasswordForm from "../../components/forms/reset-password";
 
 const ResetPasswordPage: FC = () => {
     const location = useLocation();

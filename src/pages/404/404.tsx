@@ -1,5 +1,5 @@
-import image404 from '../images/404.png';
-import styles from './404-page.module.css';
+import image404 from '../../images/404.png';
+import styles from './404.module.css';
 
 import { Link } from 'react-router-dom';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';

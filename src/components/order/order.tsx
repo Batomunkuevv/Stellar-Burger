@@ -1,5 +1,4 @@
-import { v4 as uuid } from "uuid";
-import { FC, Fragment } from "react";
+import { FC, Fragment, useMemo } from "react";
 import classNames from "classnames";
 import styles from "./order.module.css";
 
@@ -12,11 +11,13 @@ import { getIngredients } from "../../services/ingredients/selectors";
 const Order: FC<TOrder> = ({ name, number, ingredients, status, createdAt, _id, isPersonal }) => {
     const location = useLocation();
     const allIngredients = useSelector(getIngredients);
-    const orderPrice = ingredients.reduce((acc, ingredientId) => {
-        const ingredient = allIngredients.find((ingredient) => ingredient._id === ingredientId);
+    const orderPrice = useMemo(() => {
+        return ingredients.reduce((acc, ingredientId) => {
+            const ingredient = allIngredients.find((ingredient) => ingredient._id === ingredientId);
 
-        return ingredient ? acc + ingredient.price : acc;
-    }, 0);
+            return ingredient ? acc + ingredient.price : acc;
+        }, 0);
+    }, [ingredients, allIngredients]);
     const orderIngredients = ingredients.map((ingredientId) => allIngredients.find((ingredient) => ingredient._id === ingredientId));
 
     return (
@@ -31,24 +32,30 @@ const Order: FC<TOrder> = ({ name, number, ingredients, status, createdAt, _id, 
                 <div className={styles["order__bottom"]}>
                     <ul className={styles["order__ingredients"]}>
                         {orderIngredients.map((ingredient, i) => {
-                            return (
-                                <Fragment key={uuid()}>
-                                    {i < 5 ? (
-                                        <li className={styles["order__ingredient"]}>
-                                            <img src={ingredient?.image} />
-                                        </li>
-                                    ) : i === 5 && ingredients.length > 6 ? (
-                                        <li className={classNames(styles["order__ingredient"], styles["is-last"])}>
-                                            <img src={ingredient?.image} />
-                                            <div className={classNames(styles["order__more"], "text", "text_type_main-default")}>+{ingredients.length - 6}</div>
-                                        </li>
-                                    ) : i === 5 ? (
-                                        <li className={styles["order__ingredient"]}>
-                                            <img src={ingredient?.image} />
-                                        </li>
-                                    ) : null}
-                                </Fragment>
-                            );
+                            let content = null;
+
+                            if (i < 5) {
+                                content = (
+                                    <li className={styles["order__ingredient"]}>
+                                        <img src={ingredient?.image} alt={ingredient?.name} title={ingredient?.name} />
+                                    </li>
+                                );
+                            } else if (i === 5 && ingredients.length > 6) {
+                                content = (
+                                    <li className={classNames(styles["order__ingredient"], styles["is-last"])}>
+                                        <img src={ingredient?.image} alt={ingredient?.name} title={ingredient?.name} />
+                                        <div className={classNames(styles["order__more"], "text", "text_type_main-default")}>+{ingredients.length - 6}</div>
+                                    </li>
+                                );
+                            } else if (i === 5) {
+                                content = (
+                                    <li className={styles["order__ingredient"]}>
+                                        <img src={ingredient?.image} alt={ingredient?.name} title={ingredient?.name} />
+                                    </li>
+                                );
+                            }
+
+                            return <Fragment key={ingredient?._id}>{content}</Fragment>;
                         })}
                     </ul>
                     <div className={classNames(styles["order__price"], "text", "text_type_digits-default")}>

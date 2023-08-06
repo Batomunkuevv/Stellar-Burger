@@ -1,4 +1,3 @@
-import { v4 as uuid } from 'uuid';
 import { FC } from "react";
 import { useSelector } from "../../hooks/redux-hooks";
 import styles from "./feed-orders.module.css";
@@ -12,7 +11,7 @@ const FeedOrders: FC = () => {
     return (
         <ul className={styles["feed-orders"]}>
             {orders.map(order => (
-                <Order key={uuid()} {...order}/>
+                <Order key={order._id} {...order}/>
             ))}
         </ul>
     );

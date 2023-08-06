@@ -1,5 +1,5 @@
 import { FC } from "react";
-import OrderDetails from "../components/order-details/order-details";
+import OrderDetails from "../../components/order-details/order-details";
 
 const OrderPage: FC = () => {
     return <OrderDetails onPage/>;

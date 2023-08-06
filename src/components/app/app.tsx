@@ -1,30 +1,24 @@
 import { FC, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "../../hooks/redux-hooks";
+import { useDispatch } from "../../hooks/redux-hooks";
 import { getIngredients } from "../../services/ingredients/actions";
 import { checkUserAuth } from "../../services/user/actions";
-import { FeedWsTypes } from "../../services/feed";
 
 import ProtectedRouteElement from "../../hocs/protected-route-element";
 import Layout from "../layout/layout";
-import pages from "../../pages";
+import Pages from "../../pages";
 import UserInfo from "../user-info/user-info";
 import UserOrders from "../user-orders.jsx/user-orders";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import Modal from "../modal/modal";
-import { getCookie } from "../../utils/cookie";
-import { UserOrdersWsTypes } from "../../services/user-orders";
 import OrderDetails from "../order-details/order-details";
 
 const App: FC = () => {
     const dispatch = useDispatch();
-    const accessToken = getCookie("accessToken");
 
     useEffect(() => {
         dispatch(getIngredients());
         dispatch(checkUserAuth());
-        dispatch({ type: FeedWsTypes.CONNECTION_START });
-        if (accessToken) dispatch({ type: UserOrdersWsTypes.CONNECTION_START });
     }, [dispatch]);
 
     const ModalSwitch = () => {
@@ -40,12 +34,12 @@ const App: FC = () => {
         return (
             <Routes>
                 <Route path="/" element={<Layout />}>
-                    <Route index element={<pages.main />} />
+                    <Route index element={<Pages.main />} />
                     <Route
                         path="login"
                         element={
                             <ProtectedRouteElement onlyUnAuth>
-                                <pages.login />
+                                <Pages.login />
                             </ProtectedRouteElement>
                         }
                     />
@@ -53,7 +47,7 @@ const App: FC = () => {
                         path="register"
                         element={
                             <ProtectedRouteElement onlyUnAuth>
-                                <pages.register />
+                                <Pages.register />
                             </ProtectedRouteElement>
                         }
                     />
@@ -61,7 +55,7 @@ const App: FC = () => {
                         path="forgot-password"
                         element={
                             <ProtectedRouteElement onlyUnAuth>
-                                <pages.forgotPassword />
+                                <Pages.forgotPassword />
                             </ProtectedRouteElement>
                         }
                     />
@@ -69,7 +63,7 @@ const App: FC = () => {
                         path="reset-password"
                         element={
                             <ProtectedRouteElement onlyUnAuth>
-                                <pages.resetPassword />
+                                <Pages.resetPassword />
                             </ProtectedRouteElement>
                         }
                     />
@@ -77,7 +71,7 @@ const App: FC = () => {
                         path="profile"
                         element={
                             <ProtectedRouteElement>
-                                <pages.profile />
+                                <Pages.profile />
                             </ProtectedRouteElement>
                         }
                     >
@@ -91,8 +85,8 @@ const App: FC = () => {
                             }
                         />
                     </Route>
-                    <Route path="feed" element={<pages.feed />}></Route>
-                    <Route path="*" element={<pages.notFound404 />} />
+                    <Route path="feed" element={<Pages.feed />}></Route>
+                    <Route path="*" element={<Pages.notFound404 />} />
 
                     {from ? (
                         <Route
@@ -123,7 +117,7 @@ const App: FC = () => {
                             path="/profile/orders/:orderId"
                             element={
                                 <ProtectedRouteElement>
-                                    <pages.order />
+                                    <Pages.order />
                                 </ProtectedRouteElement>
                             }
                         ></Route>
@@ -139,7 +133,7 @@ const App: FC = () => {
                             }
                         />
                     ) : (
-                        <Route path="feed/:orderId" element={<pages.order />} />
+                        <Route path="feed/:orderId" element={<Pages.order />} />
                     )}
                 </Route>
             </Routes>
