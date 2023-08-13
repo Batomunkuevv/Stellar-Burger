@@ -1,0 +1,124 @@
+.order {
+    border-radius: 40px;
+    background: #1c1c21;
+    box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.04), 0px 0px 2px 0px rgba(0, 0, 0, 0.06), 0px 4px 8px 0px rgba(0, 0, 0, 0.04);
+    border: 1px solid transparent;
+    transition: all 0.3s ease-in-out 0s;
+}
+
+.order:hover{
+    border-color: #4c4cff;
+}
+
+.order__link {
+    color: #fff;
+    text-decoration: none;
+}
+
+.order__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.order__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.order__ingredients {
+    padding: 0;
+    margin: 0;
+    list-style: unset;
+    display: flex;
+    align-items: center;
+}
+
+.order__ingredient {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    overflow: hidden;
+    background: linear-gradient(223deg, #801ab2 0%, #4c4cff 100%);
+}
+
+.order__ingredient::before {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
+    border-radius: 50%;
+    background: #131316;
+}
+
+.order__ingredient img {
+    z-index: 2;
+}
+
+.order__ingredient:first-child {
+    z-index: 6;
+}
+
+.order__ingredient:nth-child(2) {
+    z-index: 5;
+}
+
+.order__ingredient:nth-child(3) {
+    z-index: 4;
+}
+
+.order__ingredient:nth-child(4) {
+    z-index: 3;
+}
+
+.order__ingredient:nth-child(5) {
+    z-index: 2;
+}
+
+.order__ingredient:nth-child(6) {
+    z-index: 1;
+}
+
+.is-last:after{
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
+    border-radius: 50%;
+    background: #1C1C21;
+    opacity: 0.6;
+    z-index: 2;
+}
+
+.order__ingredient:not(:first-child) {
+    margin-left: -16px;
+}
+
+.order__ingredient:nth-child(n + 7) {
+    display: none;
+}
+
+.order__more{
+    color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+}
+
+.order__price {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}

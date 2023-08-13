@@ -1,7 +1,52 @@
-.order-details{
+.order-details {
+    max-width: 640px;
+}
+
+.order-details--page{
+    margin: 122px auto;
+}
+
+.order-details__number{
     text-align: center;
 }
 
-.order-details__check{
-    margin-bottom: 56px;
+.is-ready{
+    color: #00CCCC;
+}
+
+.order-details__composition {
+    margin-top: 0;
+    margin-bottom: 48px;
+    padding-left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-height: 304px;
+    overflow: auto;
+    scrollbar-color: #8585ad #2f2f37;
+    scrollbar-width: auto;
+}
+
+.order-details__composition::-webkit-scrollbar {
+    width: 8px;
+}
+
+.order-details__composition::-webkit-scrollbar-track {
+    background: #2f2f37;
+}
+
+.order-details__composition::-webkit-scrollbar-thumb {
+    background-color: #8585ad;
+}
+
+.order-details__price{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.order-details__bottom{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }

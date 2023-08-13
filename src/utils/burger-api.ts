@@ -12,7 +12,7 @@ const checkResponse = (res: Response) => {
 };
 
 const checkSuccess = (res: any) => {
-    if (res && res.ok) {
+    if (res && res.success) {
         return res;
     }
     return Promise.reject(`Ответ не success: ${res}`);
@@ -43,6 +43,8 @@ export const getOrderRequest = (constructorIngredients: Array<TIngredient>) => {
         body: JSON.stringify(body),
     });
 };
+
+export const getOrderDetailsRequest = (number: number) => request(`orders/${number}`);
 
 export const sendPasswordResetRequest = (email: string) => {
     const body = {

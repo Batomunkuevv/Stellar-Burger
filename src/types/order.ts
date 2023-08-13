@@ -1,18 +1,10 @@
-import { TIngredient } from "./burger-ingredients"
-
 export type TOrder = {
-    ingredients: TIngredient[];
+    ingredients: string[];
     _id: string;
-    ovner: {
-        name: string;
-        email: string;
-        creaatedAt: string;
-        updatedAt: string;
-    };
-    status: string;
-    name: string;
+    status: 'done' | 'created' | 'pending';
+    number: number;
     createdAt: string;
     updatedAt: string;
-    number: number;
-    price: number;
-}
+    name: string;
+    isPersonal?: boolean;
+};

@@ -5,6 +5,11 @@
     margin-right: auto;
 }
 
-.preloader--ingredients{
+.preloader--ingredients {
     margin-top: 64px;
+}
+
+.preloader--feed {
+    width: 156px;
+    height: 156px;
 }

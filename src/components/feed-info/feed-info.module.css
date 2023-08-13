@@ -1,0 +1,28 @@
+.feed-info{
+    flex: 1 1 auto;
+}
+
+.feed-info__top{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 36px;
+}
+
+.feed-info__orders{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    max-height: 314px;
+    gap: 8px;
+}
+
+.is-ready li{
+    color: #00CCCC;
+}
+
+.feed-info__number{
+    text-shadow: 0px 4px 32px rgba(51, 51, 255, 0.50), 0px 0px 8px rgba(51, 51, 255, 0.25), 0px 0px 16px rgba(51, 51, 255, 0.25);
+}
