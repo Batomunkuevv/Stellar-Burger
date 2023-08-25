@@ -2,7 +2,7 @@ Stellar Burgers- одностраничное веб-приложение
 Данный проект разрабатывался в рамках учебного курса Яндекс.Практикум "React-разработчик" https://practicum.yandex.ru/react/
 
 Ссылка:
-http://stellar-burgers.ru
+https://batomunkuevv.github.io/Stellar-Burger/
 
 
 Использованные при разработке технологии:
