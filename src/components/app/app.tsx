@@ -1,5 +1,5 @@
 import { FC, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { getIngredients } from '../../services/redux/ingredients/actions';
 import { checkUserAuth } from '../../services/redux/user/actions';
