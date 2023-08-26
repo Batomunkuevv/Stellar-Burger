@@ -1,21 +1,23 @@
-Stellar Burgers - одностраничное веб-приложение.
-Данный проект разрабатывался в рамках учебного курса Яндекс.Практикум "React-разработчик" https://practicum.yandex.ru/react/
+<h1 stype="color: red" align="center">Stellar Burgers - одностраничное веб-приложение 🍔</h1>
+<p>Данный проект разрабатывался в рамках учебного курса Яндекс.Практикум "React-разработчик" https://practicum.yandex.ru/react/</p>
 
 Ссылка:
-https://
+<a href="https://batomunkuevv.github.io/Stellar-Burger/">https://batomunkuevv.github.io/Stellar-Burger/</a>
 
-Использованные при разработке технологии:
+> Использованные при разработке технологии:
 
-— HTML/CSS
-— TypeScript
-— Promises
-— React
-— Redux
-— Fetch API
-— WebSocket
-— Cookies
-— LocalStorage
-— Middleware API
-— Git
-— Jest (юнит-тесты)
-— Cypress (интеграционное e2e-тестирование)
+<ul>
+<li>HTML/CSS</li>
+<li>TypeScript</li>
+<li>Promises</li>
+<li>React</li>
+<li>Redux</li>
+<li>Fetch API</li>
+<li>WebSocket</li>
+<li>Cookies</li>
+<li>LocalStorage</li>
+<li>Middleware API</li>
+<li>Git</li>
+<li>Jest (юнит-тесты)</li>
+<li>Cypress (интеграционное e2e-тестирование)</li>
+</ul>
