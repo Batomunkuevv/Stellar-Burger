@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/Batomunkuevv/Stellar-Burger/blob/main/README.md/static/css/main.3db818f3.css",
-    "main.js": "/Batomunkuevv/Stellar-Burger/blob/main/README.md/static/js/main.943d447c.js",
-    "static/js/787.2b4cbca8.chunk.js": "/Batomunkuevv/Stellar-Burger/blob/main/README.md/static/js/787.2b4cbca8.chunk.js",
-    "static/media/404.png": "/Batomunkuevv/Stellar-Burger/blob/main/README.md/static/media/404.b5ecdc5c6be324bb818c.png",
-    "static/media/JetBrainsMono-Bold.woff": "/Batomunkuevv/Stellar-Burger/blob/main/README.md/static/media/JetBrainsMono-Bold.3914674f1cb2335acf26.woff",
-    "static/media/JetBrainsMono-Regular.woff": "/Batomunkuevv/Stellar-Burger/blob/main/README.md/static/media/JetBrainsMono-Regular.f52bee61d00ce995b89f.woff",
-    "static/media/check.svg": "/Batomunkuevv/Stellar-Burger/blob/main/README.md/static/media/check.3ba9e5cd3e425ccd87f6c48cb38cd1f5.svg",
-    "static/media/JetBrainsMono-Bold.woff2": "/Batomunkuevv/Stellar-Burger/blob/main/README.md/static/media/JetBrainsMono-Bold.c232d532ea5a5189a278.woff2",
-    "static/media/JetBrainsMono-Regular.woff2": "/Batomunkuevv/Stellar-Burger/blob/main/README.md/static/media/JetBrainsMono-Regular.b60380891bcf2eb241ca.woff2",
-    "static/media/iceland.woff": "/Batomunkuevv/Stellar-Burger/blob/main/README.md/static/media/iceland.77ad7fc2baffd9305538.woff",
-    "static/media/iceland.woff2": "/Batomunkuevv/Stellar-Burger/blob/main/README.md/static/media/iceland.4ae67a017a5ff82bbbb7.woff2",
-    "static/media/loading-bun.svg": "/Batomunkuevv/Stellar-Burger/blob/main/README.md/static/media/loading-bun.0f209bc7c906848c1452216f0ad4c3df.svg",
-    "index.html": "/Batomunkuevv/Stellar-Burger/blob/main/README.md/index.html",
-    "static/media/preloader.svg": "/Batomunkuevv/Stellar-Burger/blob/main/README.md/static/media/preloader.437329762afccc557564494ea4006332.svg",
-    "main.3db818f3.css.map": "/Batomunkuevv/Stellar-Burger/blob/main/README.md/static/css/main.3db818f3.css.map",
-    "main.943d447c.js.map": "/Batomunkuevv/Stellar-Burger/blob/main/README.md/static/js/main.943d447c.js.map",
-    "787.2b4cbca8.chunk.js.map": "/Batomunkuevv/Stellar-Burger/blob/main/README.md/static/js/787.2b4cbca8.chunk.js.map"
+    "main.css": "/static/css/main.aef40fac.css",
+    "main.js": "/static/js/main.c0f13d00.js",
+    "static/js/787.2b4cbca8.chunk.js": "/static/js/787.2b4cbca8.chunk.js",
+    "static/media/404.png": "/static/media/404.b5ecdc5c6be324bb818c.png",
+    "static/media/JetBrainsMono-Bold.woff": "/static/media/JetBrainsMono-Bold.3914674f1cb2335acf26.woff",
+    "static/media/JetBrainsMono-Regular.woff": "/static/media/JetBrainsMono-Regular.f52bee61d00ce995b89f.woff",
+    "static/media/check.svg": "/static/media/check.fd977731a4c2e670ac186d9e114ec152.svg",
+    "static/media/JetBrainsMono-Bold.woff2": "/static/media/JetBrainsMono-Bold.c232d532ea5a5189a278.woff2",
+    "static/media/JetBrainsMono-Regular.woff2": "/static/media/JetBrainsMono-Regular.b60380891bcf2eb241ca.woff2",
+    "static/media/iceland.woff": "/static/media/iceland.77ad7fc2baffd9305538.woff",
+    "static/media/iceland.woff2": "/static/media/iceland.4ae67a017a5ff82bbbb7.woff2",
+    "static/media/loading-bun.svg": "/static/media/loading-bun.8954020058f504ac25535a0d0f53e617.svg",
+    "static/media/preloader.svg": "/static/media/preloader.5872eab5e6df22856a56b321533b5294.svg",
+    "index.html": "/index.html",
+    "main.aef40fac.css.map": "/static/css/main.aef40fac.css.map",
+    "main.c0f13d00.js.map": "/static/js/main.c0f13d00.js.map",
+    "787.2b4cbca8.chunk.js.map": "/static/js/787.2b4cbca8.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.3db818f3.css",
-    "static/js/main.943d447c.js"
+    "static/css/main.aef40fac.css",
+    "static/js/main.c0f13d00.js"
   ]
 }
