@@ -1,6 +1,6 @@
 import { FC, useEffect, useMemo, useRef, useState } from "react";
 import styles from "./burger-ingredients.module.css";
-import { useSelector } from "react-redux";
+import { useSelector } from "../../hooks/redux-hooks";
 
 // Types
 import { TIngredient, TTitleRef } from "../../types";
@@ -8,7 +8,7 @@ import { TIngredient, TTitleRef } from "../../types";
 import Preloader from "../preloader/preloader";
 import Tabs from "../tabs/tabs";
 import IngredientsCategory from "../ingredients-category/ingredients-category";
-import { getIngredients, getIngredientsRequest, getIngredientsFailed } from "../../services/redux/ingredients/selectors";
+import { getIngredients, getIngredientsRequest, getIngredientsFailed } from "../../services/ingredients/selectors";
 
 const BurgerIngredients: FC = () => {
     const [currentTab, setCurrentTab] = useState("buns");

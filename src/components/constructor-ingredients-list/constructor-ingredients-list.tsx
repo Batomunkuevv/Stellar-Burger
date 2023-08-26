@@ -1,8 +1,8 @@
 import { useCallback } from "react";
 import styles from "../burger-constructor/burger-constructor.module.css";
-import { useDispatch, useSelector } from "react-redux";
-import { ConstructorTypes } from "../../services/redux/constructor/actions";
-import { getConstructorIngredients } from "../../services/redux/constructor/selectors";
+import { useDispatch, useSelector } from "../../hooks/redux-hooks";
+import { ConstructorTypes } from "../../services/constructor/constants";
+import { getConstructorIngredients } from "../../services/constructor/selectors";
 
 // Types
 import { TConstructorIngredient } from "../../types";
@@ -30,7 +30,7 @@ const ConstructorIngredientsList = () => {
     );
 
     return (
-        <ul className={`${styles["burger-constructor__list"]} pr-2`}>
+        <ul data-test="constructor-list" className={`${styles["burger-constructor__list"]} pr-2`}>
             {constructorIngredients.map((ingredient, index) => (
                 <ConstructorItem key={ingredient.handlerId} index={index} {...ingredient} moveCard={moveCard} />
             ))}

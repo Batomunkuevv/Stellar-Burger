@@ -8,14 +8,14 @@ import { Link, useLocation } from "react-router-dom";
 import { CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDrag } from "react-dnd";
 
-const BurgerIngredient: FC<TIngredientWithCount> = ({ ingredientData, count }) => {
+const BurgerIngredient: FC<TIngredientWithCount> = (props) => {
     const location = useLocation();
 
-    const { name, image, price, _id } = ingredientData;
+    const { name, image,price, _id, count } = props;
 
     const [{ opacity }, ingredientRef] = useDrag({
         type: "ingredient",
-        item: ingredientData,
+        item: props,
         collect: (monitor) => ({
             opacity: monitor.isDragging() ? 0.5 : 1,
         }),

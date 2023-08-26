@@ -1,14 +1,14 @@
 import { v4 as uuidv } from 'uuid';
 import { useState, useMemo, FC } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from '../../hooks/redux-hooks';
 import { useDrop } from 'react-dnd';
 import styles from './burger-constructor.module.css'
-import { getOrder } from '../../services/redux/order-details/actions';
-import { ConstructorTypes } from '../../services/redux/constructor/actions';
-import { OrderDetailsTypes } from '../../services/redux/order-details/actions';
-import { getUser } from '../../services/redux/user/selectors';
-import { getConstructorItems } from '../../services/redux/constructor/selectors';
+import { getOrder } from '../../services/order-details/actions';
+import { ConstructorTypes } from '../../services/constructor/constants';
+import { OrderDetailsTypes } from '../../services/order-details/constants';
+import { getUser } from '../../services/user/selectors';
+import { getConstructorItems } from '../../services/constructor/selectors';
 
 // Types
 import { TIngredient } from '../../types';
@@ -17,7 +17,7 @@ import { TUser } from '../../types';
 
 import { Button, CurrencyIcon, InfoIcon, ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import Modal from '../modal/modal';
-import OrderDetails from '../order-details/order-details';
+import OrderSuccess from '../order-success/order-success';
 import ConstructorIngredientsList from '../constructor-ingredients-list/constructor-ingredients-list';
 import loadingBun from '../../images/loading-bun.svg';
 import classNames from 'classnames';
@@ -27,7 +27,7 @@ const BurgerConstructor: FC = () => {
     const dispatch = useDispatch();
 
     const { constructorIngredients, bun }: TConstructorItems = useSelector(getConstructorItems);
-    const user: TUser = useSelector(getUser);
+    const user: TUser | null = useSelector(getUser);
     
     const totalPrice = useMemo(() => {
         return (bun ? bun.price * 2 : 0) + constructorIngredients.reduce((acc: number, ingredient: TIngredient) => {
@@ -77,7 +77,7 @@ const BurgerConstructor: FC = () => {
 
     return (
         <div className={`${styles['burger-constructor']}`}>
-            <div ref={constructorTarget} className={classNames(styles['burger-constructor__body'], { [styles['is-hover']]: isHover }, 'mb-4')}>
+            <div data-test="constructor" ref={constructorTarget} className={classNames(styles['burger-constructor__body'], { [styles['is-hover']]: isHover }, 'mb-4')}>
                 {(bun ? (
                     <ConstructorElement
                         type="top"
@@ -141,7 +141,7 @@ const BurgerConstructor: FC = () => {
             )}
             {isOrderModalOpen &&
                 <Modal onClose={handleCloseModal}>
-                    <OrderDetails />
+                    <OrderSuccess />
                 </Modal>
             }
         </div>

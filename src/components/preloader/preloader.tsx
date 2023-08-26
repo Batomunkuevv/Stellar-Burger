@@ -7,7 +7,7 @@ import { TPreloader } from "../../types";
 
 const Preloader: FC<TPreloader> = ({ extraClass }) => {
     return (
-        <div className={`${styles.preloader} ${extraClass ? styles[extraClass] : ''}`}>
+        <div data-test="preloader" className={`${styles.preloader} ${extraClass ? styles[extraClass] : ''}`}>
             <img src={preloaderImg} alt="Preload" title="preload" />
         </div>
     );

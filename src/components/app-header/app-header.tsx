@@ -23,7 +23,7 @@ const AppHeader: FC = () => {
                             <BurgerIcon type="secondary" />
                             <span className="text text_type_main-default text_color_inactive">Конструктор</span>
                         </NavLink>
-                        <NavLink to="/orders" className={addClassesToNavLink}>
+                        <NavLink to="/feed" className={addClassesToNavLink}>
                             <ListIcon type="secondary" />
                             <span className=" text text_type_main-default text_color_inactive">Лента заказов</span>
                         </NavLink>

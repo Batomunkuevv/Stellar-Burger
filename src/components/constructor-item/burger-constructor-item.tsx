@@ -1,8 +1,8 @@
 import { useRef, FC } from "react";
 import { useDrop, useDrag } from "react-dnd";
 import styles from "../burger-constructor/burger-constructor.module.css";
-import { ConstructorTypes } from "../../services/redux/constructor/actions";
-import { useDispatch } from "react-redux";
+import { ConstructorTypes } from "../../services/constructor/constants";
+import { useDispatch } from "../../hooks/redux-hooks";
 
 // Type
 import { TConstructorItem } from "../../types";
