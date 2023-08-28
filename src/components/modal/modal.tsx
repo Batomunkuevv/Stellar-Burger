@@ -18,10 +18,8 @@ const Modal: FC<PropsWithChildren<TModal>> = ({ onClose, modalTitle, children, t
     const { orderId } = useParams();
     const orders = useSelector(getFeedOrders);
     const order = orders.find((item) => item._id === orderId);
-
     useEffect(() => {
         window.addEventListener("keydown", closeModalOnEsc);
-
         return () => {
             window.removeEventListener("keydown", closeModalOnEsc);
         };
