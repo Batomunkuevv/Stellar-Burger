@@ -30,7 +30,7 @@ const ConstructorIngredientsList = () => {
     );
 
     return (
-        <ul className={`${styles["burger-constructor__list"]} pr-2`}>
+        <ul data-test="constructor-list" className={`${styles["burger-constructor__list"]} pr-2`}>
             {constructorIngredients.map((ingredient, index) => (
                 <ConstructorItem key={ingredient.handlerId} index={index} {...ingredient} moveCard={moveCard} />
             ))}

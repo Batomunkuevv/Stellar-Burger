@@ -6,7 +6,7 @@ import { TModalOverlay } from '../../types';
 
 const ModalOverlay: FC<TModalOverlay> = ({ onClose }) => {
     return (
-        <div onClick={onClose} className={`${styles.modal__overlay}`}>
+        <div data-test="modal-overlay" onClick={onClose} className={`${styles.modal__overlay}`}>
         </div>
     )
 }

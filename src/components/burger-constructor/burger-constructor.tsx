@@ -77,7 +77,7 @@ const BurgerConstructor: FC = () => {
 
     return (
         <div className={`${styles['burger-constructor']}`}>
-            <div ref={constructorTarget} className={classNames(styles['burger-constructor__body'], { [styles['is-hover']]: isHover }, 'mb-4')}>
+            <div data-test="constructor" ref={constructorTarget} className={classNames(styles['burger-constructor__body'], { [styles['is-hover']]: isHover }, 'mb-4')}>
                 {(bun ? (
                     <ConstructorElement
                         type="top"

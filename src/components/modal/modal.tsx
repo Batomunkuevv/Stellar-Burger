@@ -18,10 +18,8 @@ const Modal: FC<PropsWithChildren<TModal>> = ({ onClose, modalTitle, children, t
     const { orderId } = useParams();
     const orders = useSelector(getFeedOrders);
     const order = orders.find((item) => item._id === orderId);
-    
     useEffect(() => {
         window.addEventListener("keydown", closeModalOnEsc);
-
         return () => {
             window.removeEventListener("keydown", closeModalOnEsc);
         };
@@ -34,11 +32,15 @@ const Modal: FC<PropsWithChildren<TModal>> = ({ onClose, modalTitle, children, t
 
     return ReactDOM.createPortal(
         <>
-            <div className={`${styles.modal} pt-10 pb-15 pl-10 pr-10`}>
-                <div className={classNames(styles.modal__header, {'mb-5': type === 'order'})}>
-                    {modalTitle && <h2 className={`${styles.modal__title} text text_type_main-large`}>{modalTitle}</h2>}
+            <div data-test="modal" className={`${styles.modal} pt-10 pb-15 pl-10 pr-10`}>
+                <div className={classNames(styles.modal__header, { "mb-5": type === "order" })}>
+                    {modalTitle && (
+                        <h2 data-test="modal-title" className={`${styles.modal__title} text text_type_main-large`}>
+                            {modalTitle}
+                        </h2>
+                    )}
                     {type === "order" && <h2 className="text text_type_digits-default">#{order?.number}</h2>}
-                    <button type="button" onClick={onClose} className={`${styles.modal__close}`}>
+                    <button data-test="modal-close" type="button" onClick={onClose} className={`${styles.modal__close}`}>
                         <CloseIcon type="primary" />
                     </button>
                 </div>
